@@ -4,11 +4,13 @@ import './styles.module.css'
 import Calendar from './Components/Calendar/Calendar'
 // eslint-disable-next-line no-unused-vars
 import { Availabilities } from './Interfaces'
+// eslint-disable-next-line no-unused-vars
+import moment, { Moment } from 'moment'
 
 interface Props {
   availabilityType: 'rolling' | 'range' | 'infinity' | string
-  availabilityEndDate?: string
-  availabilityStartDate?: string
+  availabilityEndDate?: Moment
+  availabilityStartDate?: Moment
   availabilityRolling?: number
   duration: number
   availabilities: Availabilities[]
@@ -53,8 +55,8 @@ export default function SchedulerCalendar(props: Props) {
     <Calendar
       availabilities={availabilitiesData}
       availabilityType={availabilityType}
-      availabilityEndDate={availabilityEndDate}
-      availabilityStartDate={availabilityStartDate}
+      availabilityEndDate={moment(availabilityEndDate).format('YYYY-MM-DD')}
+      availabilityStartDate={moment(availabilityStartDate).format('YYYY-MM-DD')}
       availabilityRolling={availabilityRolling}
       duration={duration}
       onIntervalChange={onIntervalChange}
