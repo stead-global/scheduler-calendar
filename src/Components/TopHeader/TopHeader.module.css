@@ -1,0 +1,102 @@
+.root {
+}
+
+.justifyContentSpaceBtw {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.blockSpan {
+  display: block;
+}
+
+.topHeaderWrap {
+  margin-bottom: 25px;
+}
+
+.availabilityTitle {
+  color: #405162;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 32px;
+  margin-bottom: 1px;
+}
+
+.topHeaderDateRange {
+  color: #121a24;
+  font-family: inherit;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.topNavigatorsWrapper {
+  display: flex;
+  height: fit-content;
+}
+
+.topTodayTitle {
+  color: #707d8a;
+  font-size: 16px;
+  font-family: inherit;
+  letter-spacing: 0;
+  line-height: 20px;
+  text-align: center;
+  display: flex;
+  align-self: center;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.topHeaderNavigators {
+  border: 2px solid #d9dde0;
+  border-radius: 5px;
+  height: 38px;
+  box-sizing: border-box;
+  display: flex;
+  cursor: pointer;
+  user-select: none;
+}
+
+.navigatorInnerWrap:first-child {
+  border-right: 2px solid #d9dde0;
+}
+
+.navigatorInnerWrap {
+  box-sizing: border-box;
+  width: 38px;
+  color: #5096e5;
+}
+.navigatorInnerWrap span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navigatorInnerWrap:hover {
+  background-color: #f9f9fa;
+}
+
+.leftArrow {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+
+.rightArrow {
+  width: 38px;
+  box-sizing: border-box;
+  transform: scaleX(-1);
+  height: 100%;
+  width: 100%;
+}
+
+.disableNavigator {
+  background-color: #fafafc !important;
+  pointer-events: none;
+  color: #d9dde0;
+  cursor: default;
+}

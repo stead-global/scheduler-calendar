@@ -1,0 +1,82 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 800px;
+  padding-bottom: 30px;
+}
+
+.root {
+}
+
+.justifyContentSpaceBtw {
+  justify-content: space-between;
+  display: flex;
+}
+
+.blockSpan {
+  display: block;
+}
+
+.table {
+  width: 100%;
+  border-spacing: 10px;
+  margin-top: -5px;
+  user-select: none;
+}
+
+.showMoreText {
+  text-align: center;
+}
+.showMoreText svg {
+  color: #5096e5;
+  transform: rotate(-90deg);
+}
+
+.showMoreWrap {
+  display: flex;
+  align-items: center;
+  color: #909499;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 17px;
+  font-weight: 500;
+  position: relative;
+  cursor: pointer;
+}
+
+.showMoreWrap::after {
+  display: block;
+  content: "";
+  width: 100%;
+  border-top: 1.5px dashed #afb2b6;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+}
+
+.showMore {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 40px;
+  position: absolute;
+  bottom: -15px;
+  background-color: #ffffff;
+  box-shadow: 0px -22px 18px 10px #ffffff;
+  padding-bottom: 25px;
+}
+
+.showMoreSvg {
+  transform: rotate(-90deg);
+  height: 12px;
+  width: 8px;
+}
+
+.showMoreSvgWrap {
+  display: flex;
+  color: #afb2b6;
+  margin-left: 5px;
+}

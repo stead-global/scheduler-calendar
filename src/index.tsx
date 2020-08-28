@@ -1,10 +1,71 @@
-import * as React from 'react'
-import styles from './styles.module.css'
+import React from 'react'
+import './index.css'
+import './styles.module.css'
+import Calendar from './Components/Calendar/Calendar'
+// eslint-disable-next-line no-unused-vars
+import { Availabilities } from './Interfaces'
 
 interface Props {
-  text: string
+  availabilityType: 'rolling' | 'range' | 'infinity' | string
+  availabilityEndDate?: string
+  availabilityStartDate?: string
+  availabilityRolling?: number
+  duration: number
+  availabilities: Availabilities[]
+  onIntervalChange: (value: any) => void
+  className?: string
+  initialRenderOfRows?: number
+  totalNumOfRows?: number
+  tableContainerStyle?: string
+  dayTextStyle?: string
+  dayConstainerStyle?: string
+  intervalsWrapStyle?: string
+  is24hour?: boolean
 }
 
-export const ExampleComponent = ({ text }: Props) => {
-  return <div className={styles.test}>Example Component: {text}</div>
+export default function SchedulerCalendar(props: Props) {
+  const {
+    availabilityType = 'rolling',
+    availabilityStartDate,
+    availabilityEndDate,
+    availabilityRolling = 60,
+    duration,
+    onIntervalChange,
+    className,
+    initialRenderOfRows,
+    totalNumOfRows,
+    tableContainerStyle,
+    dayConstainerStyle,
+    dayTextStyle,
+    intervalsWrapStyle,
+    is24hour = false
+  } = props
+
+  const [availabilitiesData, setAvailabilitiesData] = React.useState(
+    props.availabilities
+  )
+
+  React.useEffect(() => {
+    setAvailabilitiesData(JSON.parse(JSON.stringify(props.availabilities)))
+  }, [props.availabilities])
+
+  return (
+    <Calendar
+      availabilities={availabilitiesData}
+      availabilityType={availabilityType}
+      availabilityEndDate={availabilityEndDate}
+      availabilityStartDate={availabilityStartDate}
+      availabilityRolling={availabilityRolling}
+      duration={duration}
+      onIntervalChange={onIntervalChange}
+      className={className}
+      initialRenderOfRows={initialRenderOfRows}
+      totalNumOfRows={totalNumOfRows}
+      tableContainerStyle={tableContainerStyle}
+      dayConstainerStyle={dayConstainerStyle}
+      dayTextStyle={dayTextStyle}
+      intervalsWrapStyle={intervalsWrapStyle}
+      is24hour={is24hour}
+    />
+  )
 }

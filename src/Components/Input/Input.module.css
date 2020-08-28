@@ -1,0 +1,30 @@
+.root {
+}
+
+.input {
+  height: 64px;
+  width: 420px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  padding-left: 20px;
+  color: #333333;
+  font-size: size(20);
+  font-weight: 500;
+}
+
+.input:focus {
+  border-color: "blue";
+  outline: none;
+}
+
+.labelCont {
+  color: #333333;
+  font-size: size(18);
+  font-weight: 500;
+  margin-bottom: 6px;
+  line-height: 1.8;
+}
+
+.fullWidth {
+  width: 100%;
+}
