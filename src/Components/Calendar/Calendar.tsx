@@ -50,6 +50,7 @@ interface CalendarState {
   isOverrideConfirmation: OverRideData
   availabilityStartDate: string
   availabilityEndDate: string
+  availibilityRangeData: any
 }
 
 enum availabilityTypes {
@@ -110,10 +111,14 @@ export default class Calendar extends React.Component<
       endDate = moment().add(100, 'years').format('YYYY-MM-DD')
     }
 
-    return {
+    const availibilityRangeData = {
       startDate: startDate,
       endDate: endDate
     }
+
+    this.setState({
+      availibilityRangeData
+    })
   }
 
   onHandleClickNext = () => {
@@ -307,6 +312,7 @@ export default class Calendar extends React.Component<
   }
 
   componentDidMount() {
+    this.getAvailibilityRangeData()
     this.getAvailibilityData()
   }
 
@@ -316,10 +322,25 @@ export default class Calendar extends React.Component<
     if (current !== prev) {
       this.getAvailibilityData()
     }
+
+    const propChanges =
+      this.props.availabilityType !== prevProps.availabilityType ||
+      this.props.availabilityStartDate !== prevProps.availabilityStartDate ||
+      this.props.availabilityEndDate !== prevProps.availabilityEndDate ||
+      this.props.availabilityRolling !== prevProps.availabilityRolling
+    if (propChanges) {
+      this.getAvailibilityRangeData()
+    }
   }
 
   render() {
-    const { isAvailabilityModal, selectedDay, numRowsRender, date } = this.state
+    const {
+      isAvailabilityModal,
+      selectedDay,
+      numRowsRender,
+      date,
+      availibilityRangeData
+    } = this.state
     const {
       initialRenderOfRows,
       className,
@@ -357,7 +378,7 @@ export default class Calendar extends React.Component<
                 date={this.state.date}
                 onDayClick={this.onDayClick}
                 numRowsRender={numRowsRender}
-                availibilityRangeData={this.getAvailibilityRangeData()}
+                availibilityRangeData={availibilityRangeData}
                 availabilityData={this.state.availabilities}
                 isCollapsed={this.state.isCollapsedView}
                 dayConstainerStyle={dayConstainerStyle}

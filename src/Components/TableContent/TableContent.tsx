@@ -63,7 +63,6 @@ export default class TableContent extends React.Component<Props, State> {
           const startTime = !this.props.is24hour
             ? getMidDayTime(interval.startTime)
             : interval.startTime
-          // const endTime = this.getMidDayTime(moment(item, 'HH:mm').add(this.props.availabilityData?.service.duration, 'mm').format('HH:mm'));
           const endTime = !this.props.is24hour
             ? getMidDayTime(interval.endTime)
             : interval.endTime
@@ -115,7 +114,6 @@ export default class TableContent extends React.Component<Props, State> {
           {renderIntervals(item)}
         </span>
       )
-      // }
     })
     return renderTimes
   }
@@ -133,8 +131,12 @@ export default class TableContent extends React.Component<Props, State> {
           this.props.availibilityRangeData?.endDate,
           'day'
         ) ||
-        (moment(currDayInMonth).isBefore(moment()) &&
-          currDayInMonth.format('DDMMYY') !== moment().format('DDMMYY'))
+        (moment(currDayInMonth).isBefore(moment(), 'day') &&
+          currDayInMonth.format('DDMMYY') !== moment().format('DDMMYY')) ||
+        !moment(currDayInMonth).isSameOrAfter(
+          this.props.availibilityRangeData?.startDate,
+          'day'
+        )
           ? styles.disabledDay
           : undefined
       const currDay = moment(currDayInMonth).format()
