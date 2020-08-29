@@ -18,8 +18,8 @@ export interface ServiceDataType {
 }
 
 export interface AvailabilityIntervals {
-  startTime: string
-  endTime: string
+  from: string
+  to: string
 }
 
 export interface AvailibilityRangeData {

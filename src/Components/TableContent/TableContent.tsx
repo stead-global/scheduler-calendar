@@ -3,14 +3,14 @@ import styles from './TableContent.module.css'
 import moment from 'moment'
 import clsx from 'clsx'
 // eslint-disable-next-line no-unused-vars
-import { AvailibilityRangeData } from '../../Interfaces'
+import { AvailibilityRangeData, Availabilities } from '../../Interfaces'
 import { getMidDayTime } from '../../Utils'
 
 interface Props {
   date: Date
   onDayClick: (day: any) => void
   numRowsRender: number
-  availabilityData: any
+  availabilityData: Availabilities[]
   isCollapsed?: boolean
   dayTextStyle?: string
   dayConstainerStyle?: string
@@ -61,11 +61,11 @@ export default class TableContent extends React.Component<Props, State> {
         intervalCount++
         if (intervalCount <= numOfInterval) {
           const startTime = !this.props.is24hour
-            ? getMidDayTime(interval.startTime)
-            : interval.startTime
+            ? getMidDayTime(interval.from)
+            : interval.from
           const endTime = !this.props.is24hour
-            ? getMidDayTime(interval.endTime)
-            : interval.endTime
+            ? getMidDayTime(interval.to)
+            : interval.to
           returnInterval.push(
             <span
               key={'time' + index}

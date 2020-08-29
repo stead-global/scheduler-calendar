@@ -41,8 +41,8 @@ class AddIntervalSection extends React.Component<Props, State> {
 
     if (!this.props.is24hour) {
       intervals.forEach((time: AvailabilityIntervals) => {
-        time.startTime = moment(time.startTime, 'hh:mm a').format('HH:mm')
-        time.endTime = moment(time.endTime, 'hh:mm a').format('HH:mm')
+        time.from = moment(time.from, 'hh:mm a').format('HH:mm')
+        time.to = moment(time.to, 'hh:mm a').format('HH:mm')
       })
     }
 
@@ -59,20 +59,20 @@ class AddIntervalSection extends React.Component<Props, State> {
   validateIntervals = (interval: any, values: any) => {
     const duration = this.props.intervalDetails.duration
 
-    if (!interval.startTime && !interval.endTime) {
+    if (!interval.from && !interval.to) {
       return 'Start time cannot be blank.'
     }
 
-    if (interval.startTime && !interval.endTime) {
+    if (interval.from && !interval.to) {
       return 'End time cannot be blank.'
     }
 
     const startTime = this.props.is24hour
-      ? moment(interval.startTime, 'HH:mm')
-      : moment(interval.startTime, 'hh:mm a')
+      ? moment(interval.from, 'HH:mm')
+      : moment(interval.from, 'hh:mm a')
     const endTime = this.props.is24hour
-      ? moment(interval.endTime, 'HH:mm')
-      : moment(interval.endTime, 'hh:mm a')
+      ? moment(interval.to, 'HH:mm')
+      : moment(interval.to, 'hh:mm a')
 
     const durationDiffrnc = endTime.diff(startTime, 'minutes')
 
@@ -88,11 +88,11 @@ class AddIntervalSection extends React.Component<Props, State> {
 
     values.forEach((item: any) => {
       const start = this.props.is24hour
-        ? moment(item.startTime, 'HH:mm')
-        : moment(item.startTime, 'hh:mm a')
+        ? moment(item.from, 'HH:mm')
+        : moment(item.from, 'hh:mm a')
       const end = this.props.is24hour
-        ? moment(item.endTime, 'HH:mm')
-        : moment(item.endTime, 'hh:mm a')
+        ? moment(item.to, 'HH:mm')
+        : moment(item.to, 'hh:mm a')
       if (endTime.isAfter(start) && startTime.isBefore(end)) {
         errorMsg = 'Intervals are overlapping.'
       }
@@ -155,8 +155,8 @@ class AddIntervalSection extends React.Component<Props, State> {
       const value: any = values
       value.intervals &&
         value.intervals.forEach((item: any) => {
-          item.startTime = getTimeFromText(item.startTime, this.props.is24hour)
-          item.endTime = getTimeFromText(item.endTime, this.props.is24hour)
+          item.from = getTimeFromText(item.from, this.props.is24hour)
+          item.to = getTimeFromText(item.to, this.props.is24hour)
         })
     }
     return (
@@ -198,11 +198,11 @@ class AddIntervalSection extends React.Component<Props, State> {
                                       ? styles.error
                                       : undefined
                                   }`}
-                                  name={`intervals[${index}].startTime`}
+                                  name={`intervals[${index}].from`}
                                   onBlur={handleBlur}
                                   onChange={handleChange}
                                   onFocus={() => this.resetErrorField(index)}
-                                  value={values.intervals[index].startTime}
+                                  value={values.intervals[index].from}
                                   placeholder={
                                     this.props.is24hour ? 'HH:mm' : 'hh:mm am'
                                   }
@@ -221,11 +221,11 @@ class AddIntervalSection extends React.Component<Props, State> {
                                       ? styles.error
                                       : undefined
                                   }`}
-                                  name={`intervals[${index}].endTime`}
+                                  name={`intervals[${index}].to`}
                                   onBlur={handleBlur}
                                   onChange={handleChange}
                                   onFocus={() => this.resetErrorField(index)}
-                                  value={values.intervals[index].endTime}
+                                  value={values.intervals[index].to}
                                   placeholder={
                                     this.props.is24hour ? 'HH:mm' : 'hh:mm am'
                                   }
@@ -254,7 +254,7 @@ class AddIntervalSection extends React.Component<Props, State> {
                         <div className={styles.container}>
                           <div
                             onClick={() => {
-                              arrayHelpers.push({ startTime: '', endTime: '' })
+                              arrayHelpers.push({ from: '', to: '' })
                             }}
                             className={styles.addBtn}
                           >

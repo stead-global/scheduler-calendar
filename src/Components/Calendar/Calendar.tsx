@@ -165,16 +165,16 @@ export default class Calendar extends React.Component<
     if (data.length !== 0) {
       data[0].slots.forEach((item: any) => {
         const interval = {
-          startTime: item.startTime,
-          endTime: item.endTime
+          from: item.from,
+          to: item.to
         }
 
         intervals.push(interval)
       })
     } else {
       const interval = {
-        startTime: '',
-        endTime: ''
+        from: '',
+        to: ''
       }
 
       intervals.push(interval)
