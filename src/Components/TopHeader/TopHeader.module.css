@@ -100,3 +100,8 @@
   color: #d9dde0;
   cursor: default;
 }
+
+.leftArrowSvg {
+  height: 14px;
+  width: 10px;
+}

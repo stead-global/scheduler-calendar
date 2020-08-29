@@ -83,9 +83,10 @@ export default class TableContent extends React.Component<Props, State> {
           }
         } else {
           returnInterval.push(
-            <span className={styles.intervalMoreBlock}>{`+${
-              item.length - numOfInterval
-            } more`}</span>
+            <span
+              key={item.length + 'more'}
+              className={styles.intervalMoreBlock}
+            >{`+${item.length - numOfInterval} more`}</span>
           )
           return false
         }

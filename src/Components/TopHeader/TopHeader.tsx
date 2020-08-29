@@ -34,12 +34,12 @@ export default function TopHeader(props: Props) {
               onClick={props.onPrev}
             >
               <span className={`${styles.leftArrow} ${styles.blockSpan} `}>
-                <ArrowLeftIcon />
+                <ArrowLeftIcon className={styles.leftArrowSvg} />
               </span>
             </div>
             <div className={styles.navigatorInnerWrap} onClick={props.onNext}>
               <span className={`${styles.rightArrow} ${styles.blockSpan}`}>
-                <ArrowLeftIcon />
+                <ArrowLeftIcon className={styles.leftArrowSvg} />
               </span>
             </div>
           </div>

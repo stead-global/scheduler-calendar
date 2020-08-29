@@ -70,13 +70,13 @@
 }
 
 .showMoreSvg {
-  transform: rotate(-90deg);
-  height: 12px;
-  width: 8px;
+  height: 9px;
+  width: 6px;
 }
 
 .showMoreSvgWrap {
   display: flex;
   color: #afb2b6;
   margin-left: 5px;
+  transform: rotate(-90deg);
 }
