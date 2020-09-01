@@ -10,18 +10,27 @@ interface Props {
   onTodayClick: () => void
   isToday: boolean
   isBefore: boolean
+  topHeaderContainerStyle?: string
+  topHeaderTitleStyle?: string
 }
 
 export default function TopHeader(props: Props) {
   const isLeftDisabled = !props.isBefore ? styles.disableNavigator : undefined
   const isToday = props.isToday
   return (
-    <div className={styles.root}>
+    <div className={clsx(styles.root, props.topHeaderContainerStyle)}>
       <div
-        className={`${styles.topHeaderWrap} ${styles.justifyContentSpaceBtw}`}
+        className={clsx(styles.topHeaderWrap, styles.justifyContentSpaceBtw)}
       >
         <div className={styles.topHeaderDetailedWrap}>
-          <span className={styles.topHeaderDateRange}>{props.dateRange}</span>
+          <span
+            className={clsx(
+              styles.topHeaderDateRange,
+              props.topHeaderTitleStyle
+            )}
+          >
+            {props.dateRange}
+          </span>
         </div>
         <div className={styles.topNavigatorsWrapper}>
           {isToday ? (

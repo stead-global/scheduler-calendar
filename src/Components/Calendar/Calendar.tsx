@@ -36,6 +36,8 @@ interface CalendarProps {
   dayTextStyle?: string
   dayConstainerStyle?: string
   intervalsWrapStyle?: string
+  topHeaderContainerStyle?: string
+  topHeaderTitleStyle?: string
   is24hour: boolean
 }
 
@@ -348,6 +350,8 @@ export default class Calendar extends React.Component<
       dayConstainerStyle,
       dayTextStyle,
       intervalsWrapStyle,
+      topHeaderContainerStyle,
+      topHeaderTitleStyle,
       is24hour
     } = this.props
     const initialRendersOfRow: number = initialRenderOfRows
@@ -369,6 +373,8 @@ export default class Calendar extends React.Component<
           onTodayClick={this.onTodayClick}
           isToday={isToday}
           isBefore={moment().endOf('week').isBefore(moment(this.state.date))}
+          topHeaderContainerStyle={topHeaderContainerStyle}
+          topHeaderTitleStyle={topHeaderTitleStyle}
         />
         <div style={{ position: 'relative' }} className={tableContainerStyle}>
           <table className={styles.table}>

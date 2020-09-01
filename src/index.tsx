@@ -22,6 +22,8 @@ interface Props {
   dayTextStyle?: string
   dayConstainerStyle?: string
   intervalsWrapStyle?: string
+  topHeaderContainerStyle?: string
+  topHeaderTitleStyle?: string
   is24hour?: boolean
 }
 
@@ -40,7 +42,9 @@ export default function SchedulerCalendar(props: Props) {
     dayConstainerStyle,
     dayTextStyle,
     intervalsWrapStyle,
-    is24hour = false
+    is24hour = false,
+    topHeaderContainerStyle,
+    topHeaderTitleStyle,
   } = props
 
   const [availabilitiesData, setAvailabilitiesData] = React.useState(
@@ -67,6 +71,8 @@ export default function SchedulerCalendar(props: Props) {
       dayConstainerStyle={dayConstainerStyle}
       dayTextStyle={dayTextStyle}
       intervalsWrapStyle={intervalsWrapStyle}
+      topHeaderContainerStyle={topHeaderContainerStyle}
+      topHeaderTitleStyle={topHeaderTitleStyle}
       is24hour={is24hour}
     />
   )
