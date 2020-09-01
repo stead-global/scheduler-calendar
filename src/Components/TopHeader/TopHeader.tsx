@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './TopHeader.module.css'
 import ArrowLeftIcon from '../../assets/Icons/ArrowLeftIcon'
+import clsx from 'clsx'
 
 interface Props {
   dateRange: string
@@ -30,15 +31,25 @@ export default function TopHeader(props: Props) {
           ) : undefined}
           <div className={styles.topHeaderNavigators}>
             <div
-              className={`${styles.navigatorInnerWrap} ${isLeftDisabled}`}
+              className={clsx(
+                styles.navigatorInnerWrap,
+                styles.navigatorInnerWrapLeft,
+                isLeftDisabled
+              )}
               onClick={props.onPrev}
             >
-              <span className={`${styles.leftArrow} ${styles.blockSpan} `}>
+              <span className={clsx(styles.leftArrow, styles.blockSpan)}>
                 <ArrowLeftIcon className={styles.leftArrowSvg} />
               </span>
             </div>
-            <div className={styles.navigatorInnerWrap} onClick={props.onNext}>
-              <span className={`${styles.rightArrow} ${styles.blockSpan}`}>
+            <div
+              className={clsx(
+                styles.navigatorInnerWrap,
+                styles.navigatorInnerWrapRight
+              )}
+              onClick={props.onNext}
+            >
+              <span className={clsx(styles.rightArrow, styles.blockSpan)}>
                 <ArrowLeftIcon className={styles.leftArrowSvg} />
               </span>
             </div>

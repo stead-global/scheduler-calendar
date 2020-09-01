@@ -80,6 +80,16 @@
   background-color: #f9f9fa;
 }
 
+.navigatorInnerWrapLeft {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.navigatorInnerWrapRight {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
 .leftArrow {
   box-sizing: border-box;
   height: 100%;
