@@ -71,7 +71,7 @@
   align-items: center;
 }
 
-.sepratorWrap.seprator {
+.sepratorWrap .seprator {
   box-sizing: border-box;
   height: 1px;
   width: 8px;
@@ -116,13 +116,13 @@
   line-height: 19px;
 }
 
-.timeTitleWrap.timeFrom,
-.timeTitleWrap.timeTo {
+.timeTitleWrap .timeFrom,
+.timeTitleWrap .timeTo {
   width: 130px;
   text-align: left;
 }
 
-.timeTitleWrap.timeFrom {
+.timeTitleWrap .timeFrom {
   margin-right: 28px;
 }
 
