@@ -60,21 +60,25 @@ export default class TableContent extends React.Component<Props, State> {
       item.every((interval: any, index: number) => {
         intervalCount++
         if (intervalCount <= numOfInterval) {
-          const startTime = !this.props.is24hour
-            ? getMidDayTime(interval.from)
-            : interval.from
-          const endTime = !this.props.is24hour
-            ? getMidDayTime(interval.to)
-            : interval.to
-          returnInterval.push(
-            <span
-              key={'time' + index}
-              className={clsx(
-                styles.intervalBlock,
-                this.props.intervalsWrapStyle
-              )}
-            >{`${startTime} - ${endTime}`}</span>
-          )
+          if (interval.from && interval.to) {
+            const startTime = !this.props.is24hour
+              ? getMidDayTime(interval.from)
+              : interval.from
+            const endTime = !this.props.is24hour
+              ? getMidDayTime(interval.to)
+              : interval.to
+            returnInterval.push(
+              <span
+                key={'time' + index}
+                className={clsx(
+                  styles.intervalBlock,
+                  this.props.intervalsWrapStyle
+                )}
+              >{`${startTime} - ${endTime}`}</span>
+            )
+          } else {
+            returnInterval.push('')
+          }
 
           if (this.props.numRowsRender === rowNum && this.props.isCollapsed) {
             return false
