@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 import React from 'react'
 import styles from './AddIntervalSection.module.css'
 import clsx from 'clsx'
@@ -166,11 +167,11 @@ class AddIntervalSection extends React.Component<Props, State> {
             initialValues={{
               intervals: [...this.props.formValues]
             }}
-            validateOnBlur
+            validateOnBlur={true}
             validateOnChange={false}
-            validateOnMount
+            validateOnMount={true}
             validate={validate}
-            enableReinitialize
+            enableReinitialize={true}
             onSubmit={() => {}}
           >
             {({ values, handleChange, handleBlur, setFieldValue }: any) => {
