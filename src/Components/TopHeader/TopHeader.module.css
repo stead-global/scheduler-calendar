@@ -1,6 +1,3 @@
-.root {
-}
-
 .justifyContentSpaceBtw {
   justify-content: space-between;
   display: flex;
@@ -70,6 +67,7 @@
   box-sizing: border-box;
   width: 38px;
   color: #5096e5;
+  background-color: #ffffff;
 }
 .navigatorInnerWrap span {
   display: flex;

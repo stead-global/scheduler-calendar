@@ -59,14 +59,12 @@
 .showMore {
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  height: 40px;
   position: absolute;
-  bottom: -15px;
-  background-color: #ffffff;
-  box-shadow: 0px -22px 18px 10px #ffffff;
-  padding-bottom: 25px;
+  bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #FAFAFC 48%);
+  height: 140px;
 }
 
 .showMoreSvg {

@@ -41,9 +41,12 @@
 }
 
 .lastWrap {
-  height: 88px;
   box-sizing: border-box;
   pointer-events: none;
+  background-color: #E3E3E547;
+  height: 140px;
+  padding-bottom: 0;
+  max-height: 140px;
 }
 
 .intervalMoreBlock {

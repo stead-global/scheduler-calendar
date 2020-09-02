@@ -165,13 +165,14 @@ class AddIntervalSection extends React.Component<Props, State> {
         <div className={styles.intervalContainer}>
           <Formik
             initialValues={{
-              intervals: [...this.props.formValues]
+              intervals: JSON.parse(JSON.stringify([...this.props.formValues]))
             }}
+            enableReinitialize={true}
             validateOnBlur={true}
             validateOnChange={false}
             validateOnMount={true}
             validate={validate}
-            enableReinitialize={true}
+            dirty={true}
             onSubmit={() => {}}
           >
             {({ values, handleChange, handleBlur, setFieldValue }: any) => {

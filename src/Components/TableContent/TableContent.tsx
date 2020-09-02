@@ -47,7 +47,7 @@ export default class TableContent extends React.Component<Props, State> {
     return daysElementArray
   }
 
-  timeInterval = (date: any, rowNum: number) => {
+  timeInterval = (date: any) => {
     const formattedDate = moment(date).format('YYYY-MM-DD')
     const formattedDay = moment(date).format('ddd').toLowerCase()
     const renderTimes: any = []
@@ -55,8 +55,7 @@ export default class TableContent extends React.Component<Props, State> {
     const renderIntervals = (item: any) => {
       const returnInterval: any = []
       let intervalCount: number = 0
-      const numOfInterval =
-        this.props.numRowsRender === rowNum && this.props.isCollapsed ? 1 : 2
+      const numOfInterval = 2
       item.every((interval: any, index: number) => {
         intervalCount++
         if (intervalCount <= numOfInterval) {
@@ -80,11 +79,7 @@ export default class TableContent extends React.Component<Props, State> {
             returnInterval.push('')
           }
 
-          if (this.props.numRowsRender === rowNum && this.props.isCollapsed) {
-            return false
-          } else {
-            return true
-          }
+          return true
         } else {
           returnInterval.push(
             <span
@@ -129,7 +124,7 @@ export default class TableContent extends React.Component<Props, State> {
     // Days rendered in a week must be at least 1, and we want to stop on the next sunday
     // Also, we want to make sure that we don't overshoot to the next month
     while (daysToRender.length === 0 || currDayInMonth.isoWeekday() % 7 !== 0) {
-      const dayIntervalData = this.timeInterval(currDayInMonth.format(), rowNum)
+      const dayIntervalData = this.timeInterval(currDayInMonth.format())
       const isToday = currDayInMonth.diff(moment().startOf('day'), 'days') === 0
       const isDisabled =
         !moment(currDayInMonth).isSameOrBefore(
