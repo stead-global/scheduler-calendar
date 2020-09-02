@@ -40,13 +40,6 @@ class AddIntervalSection extends React.Component<Props, State> {
   handleSubmit = (values: any, day: string, period: PeriodsOfDay) => {
     const intervals = values.intervals
 
-    if (!this.props.is24hour) {
-      intervals.forEach((time: AvailabilityIntervals) => {
-        time.from = moment(time.from, 'hh:mm a').format('HH:mm')
-        time.to = moment(time.to, 'hh:mm a').format('HH:mm')
-      })
-    }
-
     const availabilities = [
       {
         day: day,
@@ -167,12 +160,9 @@ class AddIntervalSection extends React.Component<Props, State> {
             initialValues={{
               intervals: JSON.parse(JSON.stringify([...this.props.formValues]))
             }}
-            enableReinitialize={true}
             validateOnBlur={true}
             validateOnChange={false}
-            validateOnMount={true}
             validate={validate}
-            dirty={true}
             onSubmit={() => {}}
           >
             {({ values, handleChange, handleBlur, setFieldValue }: any) => {

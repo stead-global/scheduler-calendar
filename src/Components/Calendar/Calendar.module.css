@@ -44,6 +44,7 @@
   font-weight: 500;
   position: relative;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .showMoreWrap::after {
@@ -63,7 +64,7 @@
   bottom: 10px;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #FAFAFC 48%);
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #FAFAFC 44%);
   height: 140px;
 }
 

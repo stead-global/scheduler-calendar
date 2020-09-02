@@ -167,8 +167,16 @@ export default class Calendar extends React.Component<
     if (data.length !== 0) {
       data[0].slots.forEach((item: any) => {
         const interval = {
-          from: item.from,
+          from: item.from
+            ? this.props.is24hour
+              ? item.from
+              : moment(item.from, 'HH:mm').format('hh:mm a')
+            : '',
           to: item.to
+            ? this.props.is24hour
+              ? item.to
+              : moment(item.to, 'HH:mm').format('hh:mm a')
+            : ''
         }
 
         intervals.push(interval)
@@ -267,6 +275,13 @@ export default class Calendar extends React.Component<
   }
 
   onFormSubmit = (value: Availabilities[], period: PeriodsOfDay) => {
+    const intervals = value
+    if (!this.props.is24hour) {
+      intervals[0].slots.forEach((time: AvailabilityIntervals) => {
+        time.from = moment(time.from, 'hh:mm a').format('HH:mm')
+        time.to = moment(time.to, 'hh:mm a').format('HH:mm')
+      })
+    }
     if (period === PeriodsOfDay.ALL) {
       this.getOverridingData(value)
     } else {
@@ -397,7 +412,7 @@ export default class Calendar extends React.Component<
           {numRowsRender === initialRendersOfRow ? (
             <div className={styles.showMore}>
               <div className={styles.showMoreWrap} onClick={this.onShowMore}>
-                show more
+                Show more
                 <span className={styles.showMoreSvgWrap}>
                   <ArrowLeftIcon className={styles.showMoreSvg} />
                 </span>
