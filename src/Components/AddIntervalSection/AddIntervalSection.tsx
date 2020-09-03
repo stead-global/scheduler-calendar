@@ -9,6 +9,7 @@ import { getTimeFromText } from '../../Utils'
 import DeleteSvg from '../../assets/Icons/DeleteSvg'
 // eslint-disable-next-line no-unused-vars
 import { AvailabilityIntervals, Availabilities } from '../../Interfaces'
+import { AddSvg } from '../../assets/Icons/AddSvg'
 
 interface Props {
   onClose: () => void
@@ -250,7 +251,7 @@ class AddIntervalSection extends React.Component<Props, State> {
                             }}
                             className={styles.addBtn}
                           >
-                            + new interval
+                            <AddSvg /> new interval
                           </div>
                         </div>
                         <div className={styles.unavailableBtnWrap}>

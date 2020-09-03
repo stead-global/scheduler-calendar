@@ -7,9 +7,6 @@
   padding-bottom: 30px;
 }
 
-.root {
-}
-
 .justifyContentSpaceBtw {
   justify-content: space-between;
   display: flex;
@@ -51,7 +48,7 @@
   display: block;
   content: "";
   width: 100%;
-  border-top: 1.5px dashed #afb2b6;
+  border-top: 1.5px dotted #afb2b6;
   position: absolute;
   bottom: 0px;
   left: 0;

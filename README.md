@@ -6,6 +6,8 @@
 
 ## Install
 
+To use the calendar you just need to:
+
 ```bash
 npm install --save scheduler-calendar
 ```
@@ -24,6 +26,26 @@ class Example extends Component {
   }
 }
 ```
+
+## SchedulerCalendar Props
+
+| Prop                        | Type       | Description                                                                           |
+| :-------------------------- | :--------- | :------------------------------------------------------------------------------------ |
+| **`availabilities`**        | `Array`    | List of availabilities. Eg. `[{day: "mon", "slots": [{from: "11:00", to: "13:00"}]}]` |
+| **`duration`**              | `number`   | Minimum duration of time interval                                                     |
+| **`onIntervalChange`**      | `Function` | Callback when a interval is updated and it's contains the array of updated values     |
+| **`availabilityType`**      | `string`   | values must be one of `rolling                                                        | range | infinity` |
+| **`availabilityEndDate`**   | `Moment`   | end of date range when availability type is 'range'                                   |
+| **`availabilityStartDate`** | `Moment`   | start of date range when availability type is 'range'                                 |
+| **`availabilityRolling`**   | `number`   | number of rolling days when availability type is 'rolling'                            |
+| **`initialRenderOfRows`**   | `number`   | number of rows to render at initial                                                   |
+| **`totalNumOfRows`**        | `number`   | total number of rows for calendar                                                     |
+| **`tableContainerStyle`**   | `string`   | to style calendar                                                                     |
+| **`dayConstainerStyle`**    | `string`   | to style each cell of calendar                                                        |
+| **`dayTextStyle`**          | `string`   | to style day text                                                                     |
+| **`intervalsWrapStyle`**    | `string`   | to style wrapper of interval shown in calendar                                        |
+| **`is24hour`**              | `boolean`  | true if time in 24 hours                                                              |
+| **`topHeaderStyle`**        | `string`   | to style header container                                                             |
 
 ## License
 
