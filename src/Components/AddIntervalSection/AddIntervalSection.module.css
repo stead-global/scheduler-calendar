@@ -241,7 +241,7 @@
   }
 }
 
-@media screen and (max-width: 370px) {
+@media screen and (max-width: 420px) {
   .timeInput {
     width: 40%;
     padding: 0 10px;

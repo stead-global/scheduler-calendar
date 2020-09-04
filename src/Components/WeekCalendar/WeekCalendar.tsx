@@ -110,9 +110,7 @@ export default class WeekCalendar extends React.Component<Props, State> {
     // eslint-disable-next-line no-unused-expressions
     interval?.forEach((item: any, index: number) => {
       renderTimes.push(
-        <span key={'wrap' + index}>
-          {renderIntervals(item)}
-        </span>
+        <span key={'wrap' + index}>{renderIntervals(item)}</span>
       )
     })
     return renderTimes
@@ -121,50 +119,48 @@ export default class WeekCalendar extends React.Component<Props, State> {
   _renderByDay = (currDayInMonth: any) => {
     const daysToRender = []
 
-      const dayIntervalData = this.timeInterval(currDayInMonth.format())
-      const isToday = currDayInMonth.diff(moment().startOf('day'), 'days') === 0
-      const isDisabled =
-        !moment(currDayInMonth).isSameOrBefore(
-          this.props.availibilityRangeData?.endDate,
-          'day'
-        ) ||
-        (moment(currDayInMonth).isBefore(moment(), 'day') &&
-          currDayInMonth.format('DDMMYY') !== moment().format('DDMMYY')) ||
-        !moment(currDayInMonth).isSameOrAfter(
-          this.props.availibilityRangeData?.startDate,
-          'day'
-        )
-          ? styles.disabledDay
-          : undefined
-      const currDay = moment(currDayInMonth).format()
-
-      daysToRender.push(
-        <td
-          key={currDayInMonth.format('DDMMYY')}
-          className={clsx(
-            styles.td,
-            isDisabled,
-            this.props.dayConstainerStyle
-          )}
-          onClick={() => {
-            this.props.onDayClick(currDay)
-          }}
-        >
-          <div className={styles.dayWrapper}>
-        <span className={styles.weekDayWrap}>{currDayInMonth.format('ddd')}</span>
-            <div className={styles.intervalsWrap}>{dayIntervalData}</div>
-            <span className={clsx(styles.dayNumber, this.props.dayTextStyle)}>
-              {isToday
-                ? 'Today'
-                : currDayInMonth.format('D') === '1'
-                ? currDayInMonth.format('MMM D')
-                : currDayInMonth.format('D')}
-            </span>
-          </div>
-        </td>
+    const dayIntervalData = this.timeInterval(currDayInMonth.format())
+    const isToday = currDayInMonth.diff(moment().startOf('day'), 'days') === 0
+    const isDisabled =
+      !moment(currDayInMonth).isSameOrBefore(
+        this.props.availibilityRangeData?.endDate,
+        'day'
+      ) ||
+      (moment(currDayInMonth).isBefore(moment(), 'day') &&
+        currDayInMonth.format('DDMMYY') !== moment().format('DDMMYY')) ||
+      !moment(currDayInMonth).isSameOrAfter(
+        this.props.availibilityRangeData?.startDate,
+        'day'
       )
+        ? styles.disabledDay
+        : undefined
+    const currDay = moment(currDayInMonth).format()
 
-      currDayInMonth.add(1, 'days')
+    daysToRender.push(
+      <td
+        key={currDayInMonth.format('DDMMYY')}
+        className={clsx(styles.td, isDisabled, this.props.dayConstainerStyle)}
+        onClick={() => {
+          this.props.onDayClick(currDay)
+        }}
+      >
+        <div className={styles.dayWrapper}>
+          <span className={styles.weekDayWrap}>
+            {currDayInMonth.format('ddd')}
+          </span>
+          <div className={styles.intervalsWrap}>{dayIntervalData}</div>
+          <span className={clsx(styles.dayNumber, this.props.dayTextStyle)}>
+            {isToday
+              ? 'Today'
+              : currDayInMonth.format('D') === '1'
+              ? currDayInMonth.format('MMM D')
+              : currDayInMonth.format('D')}
+          </span>
+        </div>
+      </td>
+    )
+
+    currDayInMonth.add(1, 'days')
 
     return daysToRender
   }
