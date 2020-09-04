@@ -70,8 +70,11 @@ export default class Calendar extends React.Component<
   CalendarProps,
   CalendarState
 > {
+  private containerRef: React.RefObject<HTMLInputElement>
+
   constructor(props: CalendarProps) {
     super(props)
+    this.containerRef = React.createRef()
     this.state = {
       date: moment().startOf('week').toDate(),
       isAvailabilityModal: false,
@@ -348,11 +351,13 @@ export default class Calendar extends React.Component<
   }
 
   getScreenWidth = () => {
-    console.log('resize', window.innerWidth)
-    const width = Number(Math.round(window.innerWidth).toFixed())
-    this.setState({
-      minScreenWidth: width > 850
-    })
+    const refWidth = this.containerRef.current?.clientWidth
+    if (refWidth) {
+      const width = Number(Math.round(refWidth).toFixed())
+      this.setState({
+        minScreenWidth: width > 850
+      })
+    }
   }
 
   componentDidMount() {
@@ -414,7 +419,10 @@ export default class Calendar extends React.Component<
       moment(date).format('DD-MM-YYYY') !==
       moment().startOf('week').format('DD-MM-YYYY')
     return (
-      <div className={clsx(className, styles.container)}>
+      <div
+        className={clsx(className, styles.container)}
+        ref={this.containerRef}
+      >
         <TopHeader
           dateRange={this.getDateRangLabel()}
           onNext={this.onHandleClickNext}

@@ -43,6 +43,7 @@
   height: 54px;
   display: flex;
   align-items: center;
+  -webkit-appearance: none;
 }
 
 .timeInput::placeholder {
