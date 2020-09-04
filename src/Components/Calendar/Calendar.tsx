@@ -12,6 +12,7 @@ import { AvailabilityIntervals, Availabilities } from '../../Interfaces'
 import clsx from 'clsx'
 import OverrideConfirmationDialog from '../OverrideConfirmationDialog/OverrideConfirmationDialog'
 import { PeriodsOfDay } from '../AddIntervalSection/AddIntervalSection'
+import WeekCalendar from '../WeekCalendar/WeekCalendar'
 
 type OverRideData = {
   isOverride: boolean
@@ -53,6 +54,7 @@ interface CalendarState {
   availabilityStartDate: string
   availabilityEndDate: string
   availibilityRangeData: any
+  minScreenWidth: boolean
 }
 
 enum availabilityTypes {
@@ -80,7 +82,8 @@ export default class Calendar extends React.Component<
       isOverrideConfirmation: {
         isOverride: false,
         count: 0
-      }
+      },
+      minScreenWidth: true
     } as CalendarState
   }
 
@@ -216,15 +219,18 @@ export default class Calendar extends React.Component<
     })
   }
 
-  onIntervalChange = (value: Availabilities[]) => {
-    const slots = this.state.availabilities.filter(
+  onIntervalChange = (
+    value: Availabilities[],
+    availability: Availabilities[]
+  ) => {
+    const slots = availability.filter(
       (time: Availabilities) => time.day === value[0].day
     )
     if (
       slots !== [] ||
       JSON.stringify(slots[0].slots) !== JSON.stringify(value[0].slots)
     ) {
-      let availabilites: Availabilities[] = this.state.availabilities
+      let availabilites: Availabilities[] = availability
       value.forEach((slot: Availabilities) => {
         availabilites = availabilites.filter(
           (item: Availabilities) => item.day !== slot.day
@@ -245,7 +251,7 @@ export default class Calendar extends React.Component<
       const isOverride =
         moment(item.day, 'YYYY-MM-DD').format('ddd').toLowerCase() ===
           value[0].day &&
-        moment(item.day, 'YYYY-MM-DD').isAfter(moment().subtract(1, 'day'))
+        moment(item.day, 'YYYY-MM-DD').isSameOrAfter(moment(), 'day')
       if (isOverride) {
         isOverrided = true
         count = count + 1
@@ -253,6 +259,16 @@ export default class Calendar extends React.Component<
       }
     })
     if (
+      isOverrided &&
+      count === 1 &&
+      moment(this.state.selectedDay).format('YYYY-MM-DD') ===
+        overridedValues[0].day
+    ) {
+      const availabilities = this.state.availabilities.filter(
+        (item: Availabilities) => item.day !== overridedValues[0].day
+      )
+      this.onIntervalChange(value, availabilities)
+    } else if (
       isOverrided &&
       !(
         count === 1 &&
@@ -270,7 +286,7 @@ export default class Calendar extends React.Component<
         }
       })
     } else {
-      this.onIntervalChange(value)
+      this.onIntervalChange(value, this.state.availabilities)
     }
   }
 
@@ -285,7 +301,7 @@ export default class Calendar extends React.Component<
     if (period === PeriodsOfDay.ALL) {
       this.getOverridingData(value)
     } else {
-      this.onIntervalChange(value)
+      this.onIntervalChange(value, this.state.availabilities)
     }
     this.setState({
       isAvailabilityModal: false
@@ -294,7 +310,10 @@ export default class Calendar extends React.Component<
 
   onOverrideSubmit = (value: boolean) => {
     if (!value) {
-      this.onIntervalChange(this.state.isOverrideConfirmation.currentValue)
+      this.onIntervalChange(
+        this.state.isOverrideConfirmation.currentValue,
+        this.state.availabilities
+      )
     } else {
       let availabilites: Availabilities[] = this.state.availabilities.filter(
         (item: Availabilities) =>
@@ -328,9 +347,23 @@ export default class Calendar extends React.Component<
     })
   }
 
+  getScreenWidth = () => {
+    console.log('resize', window.innerWidth)
+    const width = Number(Math.round(window.innerWidth).toFixed())
+    this.setState({
+      minScreenWidth: width > 850
+    })
+  }
+
   componentDidMount() {
     this.getAvailibilityRangeData()
     this.getAvailibilityData()
+    this.getScreenWidth()
+    window.addEventListener('resize', this.getScreenWidth)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.getScreenWidth)
   }
 
   componentDidUpdate(prevProps: CalendarProps) {
@@ -356,7 +389,8 @@ export default class Calendar extends React.Component<
       selectedDay,
       numRowsRender,
       date,
-      availibilityRangeData
+      availibilityRangeData,
+      minScreenWidth
     } = this.state
     const {
       initialRenderOfRows,
@@ -394,22 +428,37 @@ export default class Calendar extends React.Component<
         <div style={{ position: 'relative' }} className={tableContainerStyle}>
           <table className={styles.table}>
             <tbody>
-              <TableHeader />
-              <TableContent
-                date={this.state.date}
-                onDayClick={this.onDayClick}
-                numRowsRender={numRowsRender}
-                availibilityRangeData={availibilityRangeData}
-                availabilityData={this.state.availabilities}
-                isCollapsed={this.state.isCollapsedView}
-                dayConstainerStyle={dayConstainerStyle}
-                dayTextStyle={dayTextStyle}
-                intervalsWrapStyle={intervalsWrapStyle}
-                is24hour={is24hour}
-              />
+              {minScreenWidth ? <TableHeader /> : ''}
+              {minScreenWidth ? (
+                <TableContent
+                  date={this.state.date}
+                  onDayClick={this.onDayClick}
+                  numRowsRender={numRowsRender}
+                  availibilityRangeData={availibilityRangeData}
+                  availabilityData={this.state.availabilities}
+                  isCollapsed={this.state.isCollapsedView}
+                  dayConstainerStyle={dayConstainerStyle}
+                  dayTextStyle={dayTextStyle}
+                  intervalsWrapStyle={intervalsWrapStyle}
+                  is24hour={is24hour}
+                />
+              ) : (
+                <WeekCalendar
+                  date={this.state.date}
+                  onDayClick={this.onDayClick}
+                  numRowsRender={numRowsRender}
+                  availibilityRangeData={availibilityRangeData}
+                  availabilityData={this.state.availabilities}
+                  isCollapsed={this.state.isCollapsedView}
+                  dayConstainerStyle={dayConstainerStyle}
+                  dayTextStyle={dayTextStyle}
+                  intervalsWrapStyle={intervalsWrapStyle}
+                  is24hour={is24hour}
+                />
+              )}
             </tbody>
           </table>
-          {numRowsRender === initialRendersOfRow ? (
+          {numRowsRender === initialRendersOfRow && minScreenWidth ? (
             <div className={styles.showMore}>
               <div className={styles.showMoreWrap} onClick={this.onShowMore}>
                 Show more

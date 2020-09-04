@@ -2,7 +2,6 @@
 import React from 'react'
 import styles from './AddIntervalSection.module.css'
 import clsx from 'clsx'
-import FormControl from '../FormControl/FormControl'
 import { Formik, FieldArray, Field } from 'formik'
 import moment from 'moment'
 import { getTimeFromText } from '../../Utils'
@@ -96,7 +95,7 @@ class AddIntervalSection extends React.Component<Props, State> {
     return errorMsg
   }
 
-  onSubmitValidation = (values: any, day: string, period: PeriodsOfDay) => {
+  onSubmitValidation = (values: any, day?: string, period?: PeriodsOfDay) => {
     const error: any = this.state.errors
 
     if (values.intervals.length > 0) {
@@ -119,7 +118,9 @@ class AddIntervalSection extends React.Component<Props, State> {
     }
 
     if ((error.intervals && error.intervals.length === 0) || !error.intervals) {
-      this.handleSubmit(values, day, period)
+      if (day && period) {
+        this.handleSubmit(values, day, period)
+      }
     }
     this.setState({ errors: error })
   }
@@ -147,6 +148,7 @@ class AddIntervalSection extends React.Component<Props, State> {
     const intervalDate = moment(this.props.intervalDetails.day)
 
     const validate = (values: any) => {
+      this.onSubmitValidation(values)
       const value: any = values
       value.intervals &&
         value.intervals.forEach((item: any) => {
@@ -181,58 +183,54 @@ class AddIntervalSection extends React.Component<Props, State> {
                         ) : undefined}
                         {values.intervals.map((_item: any, index: any) => (
                           <div key={index} className={styles.formRow}>
-                            <div className={styles.formWrap}>
-                              <FormControl className={styles.form}>
-                                <Field
-                                  className={`${styles.timeInput} ${
-                                    styles.marginRight10
-                                  } ${
-                                    errors.intervals && errors.intervals[index]
-                                      ? styles.error
-                                      : undefined
-                                  }`}
-                                  name={`intervals[${index}].from`}
-                                  onBlur={handleBlur}
-                                  onChange={handleChange}
-                                  onFocus={() => this.resetErrorField(index)}
-                                  value={values.intervals[index].from}
-                                  placeholder={
-                                    this.props.is24hour ? 'HH:mm' : 'hh:mm am'
-                                  }
-                                />
+                            <div className={styles.form}>
+                              <Field
+                                className={clsx(
+                                  styles.timeInput,
+                                  styles.marginRight10,
+                                  errors.intervals && errors.intervals[index]
+                                    ? styles.error
+                                    : undefined
+                                )}
+                                name={`intervals[${index}].from`}
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                onFocus={() => this.resetErrorField(index)}
+                                value={values.intervals[index].from}
+                                placeholder={
+                                  this.props.is24hour ? 'HH:mm' : 'hh:mm am'
+                                }
+                              />
 
-                                <div
-                                  className={`${styles.sepratorWrap} ${styles.marginRight10}`}
-                                >
-                                  <span className={styles.seprator} />
-                                </div>
-                                <Field
-                                  className={`${styles.timeInput} ${
-                                    styles.marginRight25
-                                  } ${
-                                    errors.intervals && errors.intervals[index]
-                                      ? styles.error
-                                      : undefined
-                                  }`}
-                                  name={`intervals[${index}].to`}
-                                  onBlur={handleBlur}
-                                  onChange={handleChange}
-                                  onFocus={() => this.resetErrorField(index)}
-                                  value={values.intervals[index].to}
-                                  placeholder={
-                                    this.props.is24hour ? 'HH:mm' : 'hh:mm am'
-                                  }
-                                />
-                                <div
-                                  className={styles.deleteIcon}
-                                  onClick={() => {
-                                    arrayHelpers.remove(index)
-                                    this.resetErrorField(index)
-                                  }}
-                                >
-                                  <DeleteSvg />
-                                </div>
-                              </FormControl>
+                              <div className={styles.sepratorWrap}>
+                                <span className={styles.seprator} />
+                              </div>
+                              <Field
+                                className={clsx(
+                                  styles.timeInput,
+                                  styles.marginRight25,
+                                  errors.intervals && errors.intervals[index]
+                                    ? styles.error
+                                    : undefined
+                                )}
+                                name={`intervals[${index}].to`}
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                onFocus={() => this.resetErrorField(index)}
+                                value={values.intervals[index].to}
+                                placeholder={
+                                  this.props.is24hour ? 'HH:mm' : 'hh:mm am'
+                                }
+                              />
+                              <div
+                                className={styles.deleteIcon}
+                                onClick={() => {
+                                  arrayHelpers.remove(index)
+                                  this.resetErrorField(index)
+                                }}
+                              >
+                                <DeleteSvg />
+                              </div>
                             </div>
                             {errors.intervals && errors.intervals[index] && (
                               <div className={styles.errorMsg}>
@@ -260,11 +258,12 @@ class AddIntervalSection extends React.Component<Props, State> {
                               setFieldValue('intervals', [])
                               this.resetAllErrorField()
                             }}
-                            className={`${styles.unavailableBtn} ${
+                            className={clsx(
+                              styles.unavailableBtn,
                               values.intervals.length === 0
                                 ? styles.unavailableDisabledBtn
                                 : undefined
-                            }`}
+                            )}
                           >
                             I’m unavailable
                           </div>

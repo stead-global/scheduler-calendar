@@ -3,8 +3,6 @@
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
-  min-width: 800px;
-  padding-bottom: 30px;
 }
 
 .justifyContentSpaceBtw {
@@ -46,7 +44,7 @@
 
 .showMoreWrap::after {
   display: block;
-  content: "";
+  content: '';
   width: 100%;
   border-top: 1.5px dotted #afb2b6;
   position: absolute;
@@ -61,7 +59,7 @@
   bottom: 10px;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #FAFAFC 44%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fafafc 44%);
   height: 140px;
 }
 

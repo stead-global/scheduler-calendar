@@ -11,6 +11,8 @@ body {
     box-sizing: border-box;
   }
 
-  .sample {
-    background-color: 'red';
+  @media screen and (max-width: 400px) {
+    .MuiDialog-paper {
+      margin: 10px !important;
+    }
   }

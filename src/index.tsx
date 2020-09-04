@@ -1,6 +1,5 @@
 import React from 'react'
 import './index.css'
-import './styles.module.css'
 import Calendar from './Components/Calendar/Calendar'
 // eslint-disable-next-line no-unused-vars
 import { Availabilities } from './Interfaces'
@@ -44,7 +43,7 @@ export default function SchedulerCalendar(props: Props) {
     intervalsWrapStyle,
     is24hour = false,
     topHeaderContainerStyle,
-    topHeaderTitleStyle,
+    topHeaderTitleStyle
   } = props
 
   const [availabilitiesData, setAvailabilitiesData] = React.useState(

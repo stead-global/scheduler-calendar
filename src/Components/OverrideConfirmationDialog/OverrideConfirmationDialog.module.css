@@ -16,12 +16,18 @@
 .modal {
   background-color: white;
   border-radius: 8px;
-  padding: 35px 25px 30px 25px;
-  width: 400px;
-  min-width: 400px;
+  padding: 30px 16px 25px 16px;
+  width: 100%;
   box-sizing: border-box;
   max-height: 80%;
   position: relative;
+}
+
+@media screen and (min-width: 500px) {
+  .modal {
+    width: 400px;
+    padding: 30px 25px 25px 25px;
+  }
 }
 
 .closeIcon {
@@ -93,4 +99,17 @@
 .btnWrap.secondaryBtn:focus {
   background-color: #f9f9fa;
   outline: none;
+}
+
+@media screen and (max-width: 370px) {
+  .btnWrap {
+    flex-wrap: wrap;
+  }
+  .btnWrap .primaryBtn,
+  .btnWrap .secondaryBtn {
+    width: 100%;
+  }
+  .btnWrap .primaryBtn {
+    margin-bottom: 16px;
+  }
 }

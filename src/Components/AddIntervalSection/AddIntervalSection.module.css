@@ -53,12 +53,14 @@
   line-height: 20px;
 }
 
+.timeInput:focus:hover,
 .timeInput:focus {
   outline: none;
   border-color: #5096e5;
 }
 
-.timeInput.error {
+.timeInput.error,
+.timeInput.error:hover {
   border-color: #ed4545;
 }
 
@@ -69,6 +71,7 @@
 .sepratorWrap {
   display: flex;
   align-items: center;
+  margin-right: 10px;
 }
 
 .sepratorWrap .seprator {
@@ -206,7 +209,7 @@
   margin-top: 5px;
   font-size: 13px;
   letter-spacing: 0;
-  line-height: 19px;
+  line-height: 15px;
 }
 
 .deleteIcon {
@@ -221,4 +224,36 @@
 }
 .deleteIcon:active {
   color: #646970;
+}
+
+@media screen and (max-width: 480px) {
+  .sepratorWrap {
+    display: none;
+    margin: 0;
+  }
+
+  .timeInput.marginRight25 {
+    margin-right: 16px;
+  }
+
+  .timeTitleWrap .timeFrom {
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .timeInput {
+    width: 40%;
+    padding: 0 10px;
+  }
+
+  .timeTitleWrap .timeFrom,
+  .timeTitleWrap .timeTo {
+    width: 40%;
+  }
+
+  .unavailableBtnWrap .unavailableBtn {
+    width: 100%;
+    justify-content: center;
+  }
 }

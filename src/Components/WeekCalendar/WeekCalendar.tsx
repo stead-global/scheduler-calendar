@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './TableContent.module.css'
+import styles from './WeekCalendar.module.css'
 import moment from 'moment'
 import clsx from 'clsx'
 // eslint-disable-next-line no-unused-vars
@@ -21,7 +21,7 @@ interface Props {
 
 interface State {}
 
-export default class TableContent extends React.Component<Props, State> {
+export default class WeekCalendar extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {} as State
@@ -35,11 +35,11 @@ export default class TableContent extends React.Component<Props, State> {
 
     const daysElementArray = []
 
-    while (i < this.props.numRowsRender) {
+    while (i < 7) {
       i++
       daysElementArray.push(
         <tr key={currDayInMonth.format()}>
-          {this._renderByWeek(currDayInMonth, i)}
+          {this._renderByDay(currDayInMonth)}
         </tr>
       )
     }
@@ -50,7 +50,6 @@ export default class TableContent extends React.Component<Props, State> {
   timeInterval = (date: any) => {
     const formattedDate = moment(date).format('YYYY-MM-DD')
     const formattedDay = moment(date).format('ddd').toLowerCase()
-
     const renderTimes: any = []
 
     const renderIntervals = (item: any) => {
@@ -102,7 +101,6 @@ export default class TableContent extends React.Component<Props, State> {
         interval.push(item.slots)
         return false
       } else if (item.day === formattedDay) {
-        interval = []
         interval.push(item.slots)
         return true
       } else {
@@ -112,7 +110,7 @@ export default class TableContent extends React.Component<Props, State> {
     // eslint-disable-next-line no-unused-expressions
     interval?.forEach((item: any, index: number) => {
       renderTimes.push(
-        <span style={{ marginTop: 16 }} key={'wrap' + index}>
+        <span key={'wrap' + index}>
           {renderIntervals(item)}
         </span>
       )
@@ -120,12 +118,9 @@ export default class TableContent extends React.Component<Props, State> {
     return renderTimes
   }
 
-  _renderByWeek = (currDayInMonth: any, rowNum: number) => {
+  _renderByDay = (currDayInMonth: any) => {
     const daysToRender = []
 
-    // Days rendered in a week must be at least 1, and we want to stop on the next sunday
-    // Also, we want to make sure that we don't overshoot to the next month
-    while (daysToRender.length === 0 || currDayInMonth.isoWeekday() % 7 !== 0) {
       const dayIntervalData = this.timeInterval(currDayInMonth.format())
       const isToday = currDayInMonth.diff(moment().startOf('day'), 'days') === 0
       const isDisabled =
@@ -149,9 +144,6 @@ export default class TableContent extends React.Component<Props, State> {
           className={clsx(
             styles.td,
             isDisabled,
-            this.props.numRowsRender === rowNum && this.props.isCollapsed
-              ? styles.lastWrap
-              : '',
             this.props.dayConstainerStyle
           )}
           onClick={() => {
@@ -159,6 +151,8 @@ export default class TableContent extends React.Component<Props, State> {
           }}
         >
           <div className={styles.dayWrapper}>
+        <span className={styles.weekDayWrap}>{currDayInMonth.format('ddd')}</span>
+            <div className={styles.intervalsWrap}>{dayIntervalData}</div>
             <span className={clsx(styles.dayNumber, this.props.dayTextStyle)}>
               {isToday
                 ? 'Today'
@@ -166,13 +160,11 @@ export default class TableContent extends React.Component<Props, State> {
                 ? currDayInMonth.format('MMM D')
                 : currDayInMonth.format('D')}
             </span>
-            <div className={styles.intervalsWrap}>{dayIntervalData}</div>
           </div>
         </td>
       )
 
       currDayInMonth.add(1, 'days')
-    }
 
     return daysToRender
   }
