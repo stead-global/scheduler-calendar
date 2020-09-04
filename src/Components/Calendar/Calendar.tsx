@@ -419,10 +419,7 @@ export default class Calendar extends React.Component<
       moment(date).format('DD-MM-YYYY') !==
       moment().startOf('week').format('DD-MM-YYYY')
     return (
-      <div
-        className={clsx(className, styles.container)}
-        ref={this.containerRef}
-      >
+      <div className={clsx(className, styles.container)}>
         <TopHeader
           dateRange={this.getDateRangLabel()}
           onNext={this.onHandleClickNext}
@@ -433,7 +430,11 @@ export default class Calendar extends React.Component<
           topHeaderContainerStyle={topHeaderContainerStyle}
           topHeaderTitleStyle={topHeaderTitleStyle}
         />
-        <div style={{ position: 'relative' }} className={tableContainerStyle}>
+        <div
+          style={{ position: 'relative' }}
+          className={tableContainerStyle}
+          ref={this.containerRef}
+        >
           <table className={styles.table}>
             <tbody>
               {minScreenWidth ? <TableHeader /> : ''}
