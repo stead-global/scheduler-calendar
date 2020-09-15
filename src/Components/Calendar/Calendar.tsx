@@ -321,10 +321,16 @@ export default class Calendar extends React.Component<
         this.state.availabilities
       )
     } else {
-      let availabilites: Availabilities[] = this.state.availabilities.filter(
-        (item: Availabilities) =>
-          item.day !== this.state.isOverrideConfirmation.currentValue[0].day
+      let availabilites: Availabilities[] = this.state.availabilities
+
+      this.state.isOverrideConfirmation.currentValue.forEach(
+        (eachItem: Availabilities) => {
+          availabilites = availabilites.filter(
+            (item: Availabilities) => item.day !== eachItem.day
+          )
+        }
       )
+
       this.state.isOverrideConfirmation.overridedValues.forEach(
         (item: Availabilities) => {
           const data: Availabilities[] = []
