@@ -17,6 +17,23 @@ interface Props {
 }
 
 export default function ViewModal(props: Props) {
+  const [screenWidth, setScreenWidth] = React.useState<number>(0)
+
+  const getScreenWidth = () => {
+    const width = Number(Math.round(window.innerWidth).toFixed())
+    setScreenWidth(width)
+  }
+
+  React.useEffect(() => {
+    if (props.visible) {
+      getScreenWidth()
+      window.addEventListener('resize', getScreenWidth)
+    }
+    return () => {
+      window.removeEventListener('resize', getScreenWidth)
+    }
+  }, [props.visible])
+
   return (
     <div>
       <Dialog
@@ -24,6 +41,7 @@ export default function ViewModal(props: Props) {
         onClose={props.onClose}
         aria-labelledby='Time-interval-modal'
         aria-describedby='Time-interval-modal'
+        fullWidth={screenWidth <= 500}
       >
         <div className={styles.modal}>
           <div className={styles.closeIcon} onClick={props.onClose}>
