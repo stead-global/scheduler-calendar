@@ -117,6 +117,10 @@ export function getTimeFromText(value: string, is24hour: boolean): string {
       mins = '00'
     }
 
+    if (!is24hour && Number(hours) === 0) {
+      hours = '12'
+    }
+
     if (is24hour) {
       return `${hours.length === 1 ? `0${hours}` : `${hours}`}:${
         mins.length === 1 ? `0${mins}` : mins

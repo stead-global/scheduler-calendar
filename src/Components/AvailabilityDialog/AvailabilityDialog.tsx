@@ -29,7 +29,6 @@ export default function ViewModal(props: Props) {
           <div className={styles.closeIcon} onClick={props.onClose}>
             <CloseSvg />
           </div>
-          <div className={styles.modalTitle}>Edit Availability</div>
           <div className={styles.modalContainer}>
             <AddIntervalSection
               onClose={props.onClose}

@@ -9,6 +9,9 @@ import DeleteSvg from '../../assets/Icons/DeleteSvg'
 // eslint-disable-next-line no-unused-vars
 import { AvailabilityIntervals, Availabilities } from '../../Interfaces'
 import { AddSvg } from '../../assets/Icons/AddSvg'
+import Slide from '@material-ui/core/Slide'
+import BackArrowIcon from '../../assets/Icons/BackArrowIcon'
+import WeekDayForm from '../WeekDayForm/WeekDayForm'
 
 interface Props {
   onClose: () => void
@@ -20,6 +23,8 @@ interface Props {
 
 interface State {
   errors: any
+  isApplyToMultiple: boolean
+  showIntervalSection: boolean
 }
 
 export enum PeriodsOfDay {
@@ -33,20 +38,20 @@ class AddIntervalSection extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      errors: {} as any
+      errors: {} as any,
+      isApplyToMultiple: false,
+      showIntervalSection: true
     } as State
   }
 
-  handleSubmit = (values: any, day: string, period: PeriodsOfDay) => {
+  handleSubmit = (values: any, day: string[], period: PeriodsOfDay) => {
     const intervals = values.intervals
-
-    const availabilities = [
-      {
-        day: day,
+    const availabilities = day.map((item: string) => {
+      return {
+        day: item,
         slots: intervals
       }
-    ]
-
+    })
     this.props.onFormSubmit(availabilities, period)
   }
 
@@ -95,7 +100,12 @@ class AddIntervalSection extends React.Component<Props, State> {
     return errorMsg
   }
 
-  onSubmitValidation = (values: any, day?: string, period?: PeriodsOfDay) => {
+  onSubmitValidation = (
+    values: any,
+    day?: string[],
+    period?: PeriodsOfDay,
+    isMulti?: boolean
+  ) => {
     const error: any = this.state.errors
 
     if (values.intervals.length > 0) {
@@ -118,7 +128,9 @@ class AddIntervalSection extends React.Component<Props, State> {
     }
 
     if ((error.intervals && error.intervals.length === 0) || !error.intervals) {
-      if (day && period) {
+      if (isMulti) {
+        this.setState({ isApplyToMultiple: true })
+      } else if (day && period) {
         this.handleSubmit(values, day, period)
       }
     }
@@ -142,8 +154,8 @@ class AddIntervalSection extends React.Component<Props, State> {
     }
   }
 
-  render() {
-    const { errors } = this.state
+  _renderIntervalSection = () => {
+    const { errors, isApplyToMultiple, showIntervalSection } = this.state
 
     const intervalDate = moment(this.props.intervalDetails.day)
 
@@ -157,157 +169,214 @@ class AddIntervalSection extends React.Component<Props, State> {
         })
     }
     return (
-      <div className={styles.root}>
-        <div className={styles.intervalContainer}>
-          <Formik
-            initialValues={{
-              intervals: JSON.parse(JSON.stringify([...this.props.formValues]))
-            }}
-            validateOnBlur={true}
-            validateOnChange={false}
-            validate={validate}
-            onSubmit={() => {}}
-          >
-            {({ values, handleChange, handleBlur, setFieldValue }: any) => {
-              return (
-                <form noValidate>
-                  <FieldArray
-                    name='intervals'
-                    render={(arrayHelpers) => (
-                      <div className={clsx(styles.formBlock, styles.inputs)}>
-                        {values.intervals.length !== 0 ? (
-                          <div className={styles.timeTitleWrap}>
-                            <div className={styles.timeFrom}>From</div>
-                            <div className={styles.timeTo}>To</div>
-                          </div>
-                        ) : undefined}
-                        {values.intervals.map((_item: any, index: any) => (
-                          <div key={index} className={styles.formRow}>
-                            <div className={styles.form}>
-                              <Field
-                                className={clsx(
-                                  styles.timeInput,
-                                  styles.marginRight10,
-                                  errors.intervals && errors.intervals[index]
-                                    ? styles.error
-                                    : undefined
-                                )}
-                                name={`intervals[${index}].from`}
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                onFocus={() => this.resetErrorField(index)}
-                                value={values.intervals[index].from}
-                                placeholder={
-                                  this.props.is24hour ? 'HH:mm' : 'hh:mm am'
-                                }
-                              />
-
-                              <div className={styles.sepratorWrap}>
-                                <span className={styles.seprator} />
-                              </div>
-                              <Field
-                                className={clsx(
-                                  styles.timeInput,
-                                  styles.marginRight25,
-                                  errors.intervals && errors.intervals[index]
-                                    ? styles.error
-                                    : undefined
-                                )}
-                                name={`intervals[${index}].to`}
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                onFocus={() => this.resetErrorField(index)}
-                                value={values.intervals[index].to}
-                                placeholder={
-                                  this.props.is24hour ? 'HH:mm' : 'hh:mm am'
-                                }
-                              />
-                              <div
-                                className={styles.deleteIcon}
-                                onClick={() => {
-                                  arrayHelpers.remove(index)
-                                  this.resetErrorField(index)
-                                }}
-                              >
-                                <DeleteSvg />
-                              </div>
+      <Formik
+        initialValues={{
+          intervals: JSON.parse(JSON.stringify([...this.props.formValues]))
+        }}
+        validateOnBlur={true}
+        validateOnChange={false}
+        validate={validate}
+        onSubmit={() => {}}
+      >
+        {({ values, handleChange, handleBlur, setFieldValue }: any) => {
+          return (
+            <form noValidate>
+              {showIntervalSection && (
+                <Slide
+                  direction='right'
+                  mountOnEnter
+                  unmountOnExit
+                  in={showIntervalSection}
+                  timeout={300}
+                >
+                  <div className={styles.intervalContainer}>
+                    <div className={styles.modalTitle}>Edit Availability</div>
+                    <FieldArray
+                      name='intervals'
+                      render={(arrayHelpers) => (
+                        <div className={clsx(styles.formBlock, styles.inputs)}>
+                          {values.intervals.length !== 0 ? (
+                            <div className={styles.timeTitleWrap}>
+                              <div className={styles.timeFrom}>From</div>
+                              <div className={styles.timeTo}>To</div>
                             </div>
-                            {errors.intervals && errors.intervals[index] && (
-                              <div className={styles.errorMsg}>
-                                {errors.intervals[index]}
+                          ) : undefined}
+                          {values.intervals.map((_item: any, index: any) => (
+                            <div key={index} className={styles.formRow}>
+                              <div className={styles.form}>
+                                <Field
+                                  className={clsx(
+                                    styles.timeInput,
+                                    styles.marginRight10,
+                                    errors.intervals && errors.intervals[index]
+                                      ? styles.error
+                                      : undefined
+                                  )}
+                                  name={`intervals[${index}].from`}
+                                  onBlur={handleBlur}
+                                  onChange={handleChange}
+                                  onFocus={() => this.resetErrorField(index)}
+                                  value={values.intervals[index].from}
+                                  placeholder={
+                                    this.props.is24hour ? 'HH:mm' : 'hh:mm am'
+                                  }
+                                />
+
+                                <div className={styles.sepratorWrap}>
+                                  <span className={styles.seprator} />
+                                </div>
+                                <Field
+                                  className={clsx(
+                                    styles.timeInput,
+                                    styles.marginRight25,
+                                    errors.intervals && errors.intervals[index]
+                                      ? styles.error
+                                      : undefined
+                                  )}
+                                  name={`intervals[${index}].to`}
+                                  onBlur={handleBlur}
+                                  onChange={handleChange}
+                                  onFocus={() => this.resetErrorField(index)}
+                                  value={values.intervals[index].to}
+                                  placeholder={
+                                    this.props.is24hour ? 'HH:mm' : 'hh:mm am'
+                                  }
+                                />
+                                <div
+                                  className={styles.deleteIcon}
+                                  onClick={() => {
+                                    arrayHelpers.remove(index)
+                                    this.resetErrorField(index)
+                                  }}
+                                >
+                                  <DeleteSvg />
+                                </div>
                               </div>
-                            )}
-                          </div>
-                        ))}
-                        {values.intervals.length === 0 ? (
-                          <div className={styles.emptyWrap}>unavailable</div>
-                        ) : undefined}
-                        <div className={styles.container}>
-                          <div
-                            onClick={() => {
-                              arrayHelpers.push({ from: '', to: '' })
-                            }}
-                            className={styles.addBtn}
-                          >
-                            <AddSvg /> new interval
-                          </div>
-                        </div>
-                        <div className={styles.unavailableBtnWrap}>
-                          <div
-                            onClick={() => {
-                              setFieldValue('intervals', [])
-                              this.resetAllErrorField()
-                            }}
-                            className={clsx(
-                              styles.unavailableBtn,
-                              values.intervals.length === 0
-                                ? styles.unavailableDisabledBtn
-                                : undefined
-                            )}
-                          >
-                            I’m unavailable
-                          </div>
-                        </div>
-                        <div className={styles.container}>
-                          <div className={styles.btnWrap}>
-                            <button
-                              type='button'
-                              className={styles.largeBtn}
-                              onClick={() =>
-                                this.onSubmitValidation(
-                                  values,
-                                  intervalDate.format('YYYY-MM-DD'),
-                                  PeriodsOfDay.SINGLE
-                                )
-                              }
+                              {errors.intervals && errors.intervals[index] && (
+                                <div className={styles.errorMsg}>
+                                  {errors.intervals[index]}
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                          {values.intervals.length === 0 ? (
+                            <div className={styles.emptyWrap}>unavailable</div>
+                          ) : undefined}
+                          <div className={styles.container}>
+                            <div
+                              onClick={() => {
+                                arrayHelpers.push({ from: '', to: '' })
+                              }}
+                              className={styles.addBtn}
                             >
-                              Apply to {intervalDate.format('DD MMM')} only
-                            </button>
-                            <button
-                              type='button'
-                              className={styles.largeBtn}
-                              onClick={() =>
-                                this.onSubmitValidation(
-                                  values,
-                                  intervalDate.format('ddd').toLowerCase(),
-                                  PeriodsOfDay.ALL
-                                )
-                              }
+                              <AddSvg /> new interval
+                            </div>
+                          </div>
+                          <div className={styles.unavailableBtnWrap}>
+                            <div
+                              onClick={() => {
+                                setFieldValue('intervals', [])
+                                this.resetAllErrorField()
+                              }}
+                              className={clsx(
+                                styles.unavailableBtn,
+                                values.intervals.length === 0
+                                  ? styles.unavailableDisabledBtn
+                                  : undefined
+                              )}
                             >
-                              Apply to all {intervalDate.format('dddd')}
-                            </button>
+                              I’m unavailable
+                            </div>
+                          </div>
+                          <div className={styles.container}>
+                            <div className={styles.btnWrap}>
+                              <button
+                                type='button'
+                                className={styles.largeBtn}
+                                onClick={() =>
+                                  this.onSubmitValidation(
+                                    values,
+                                    [intervalDate.format('YYYY-MM-DD')],
+                                    PeriodsOfDay.SINGLE
+                                  )
+                                }
+                              >
+                                Apply to {intervalDate.format('DD MMM')} only
+                              </button>
+                              <button
+                                type='button'
+                                className={styles.largeBtn}
+                                onClick={() =>
+                                  this.onSubmitValidation(
+                                    values,
+                                    [intervalDate.format('ddd').toLowerCase()],
+                                    PeriodsOfDay.ALL
+                                  )
+                                }
+                              >
+                                Apply to all {intervalDate.format('dddd')}
+                              </button>
+                              <button
+                                type='button'
+                                className={styles.applyMultiple}
+                                onClick={() =>
+                                  this.onSubmitValidation(
+                                    values,
+                                    [],
+                                    PeriodsOfDay.ALL,
+                                    true
+                                  )
+                                }
+                              >
+                                Apply to multiple
+                              </button>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    )}
-                  />
-                </form>
-              )
-            }}
-          </Formik>
-        </div>
-      </div>
+                      )}
+                    />
+                  </div>
+                </Slide>
+              )}
+              <Slide
+                direction='left'
+                in={isApplyToMultiple}
+                timeout={300}
+                mountOnEnter
+                unmountOnExit
+                onEntering={() => this.setState({ showIntervalSection: false })}
+                onExiting={() => this.setState({ showIntervalSection: true })}
+              >
+                <div className={styles.applyContainer}>
+                  <div className={styles.applyTitle}>
+                    <div
+                      className={styles.backArrow}
+                      onClick={() => {
+                        this.setState({ isApplyToMultiple: false })
+                      }}
+                    >
+                      <BackArrowIcon />
+                    </div>
+                    Apply to multiple
+                  </div>
+                  <div className={styles.applyInnerContainer}>
+                    <WeekDayForm
+                      onFormSubmit={(days: string[]) => {
+                        this.handleSubmit(values, days, PeriodsOfDay.ALL)
+                      }}
+                    />
+                  </div>
+                </div>
+              </Slide>
+            </form>
+          )
+        }}
+      </Formik>
     )
+  }
+
+  render() {
+    return <div className={styles.root}>{this._renderIntervalSection()}</div>
   }
 }
 

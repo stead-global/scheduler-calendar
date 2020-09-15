@@ -17,7 +17,7 @@ import WeekCalendar from '../WeekCalendar/WeekCalendar'
 type OverRideData = {
   isOverride: boolean
   count: number
-  day: string
+  day: string[]
   overridedValues: Availabilities[]
   currentValue: Availabilities[]
 }
@@ -246,20 +246,23 @@ export default class Calendar extends React.Component<
 
   getOverridingData = (value: Availabilities[]) => {
     const availabilites: Availabilities[] = this.state.availabilities
+    const day: string[] = []
     let isOverrided: boolean = false
     const overridedValues: Availabilities[] = []
     let count: number = 0
-    const day: string = moment(value[0].day, 'ddd').format('dddd')
-    availabilites.forEach((item: Availabilities) => {
-      const isOverride =
-        moment(item.day, 'YYYY-MM-DD').format('ddd').toLowerCase() ===
-          value[0].day &&
-        moment(item.day, 'YYYY-MM-DD').isSameOrAfter(moment(), 'day')
-      if (isOverride) {
-        isOverrided = true
-        count = count + 1
-        overridedValues.push(item)
-      }
+    value.forEach((eachValue: Availabilities) => {
+      day.push(moment(eachValue.day, 'ddd').format('dddd'))
+      availabilites.forEach((item: Availabilities) => {
+        const isOverride =
+          moment(item.day, 'YYYY-MM-DD').format('ddd').toLowerCase() ===
+            eachValue.day &&
+          moment(item.day, 'YYYY-MM-DD').isSameOrAfter(moment(), 'day')
+        if (isOverride) {
+          isOverrided = true
+          count = count + 1
+          overridedValues.push(item)
+        }
+      })
     })
     if (
       isOverrided &&
@@ -343,7 +346,7 @@ export default class Calendar extends React.Component<
       isOverrideConfirmation: {
         isOverride: false,
         count: 0,
-        day: '',
+        day: [],
         overridedValues: [],
         currentValue: []
       }

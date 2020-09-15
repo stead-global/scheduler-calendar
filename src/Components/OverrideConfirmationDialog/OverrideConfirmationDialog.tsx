@@ -5,11 +5,12 @@ import Dialog from '@material-ui/core/Dialog/Dialog'
 interface Props {
   visible: boolean
   count: number
-  day: string
+  day: string[]
   onSubmit: (value: boolean) => void
 }
 
 export default function OverrideConfirmationDialog(props: Props) {
+  const day = props.day?.join(', ')
   return (
     <div>
       <Dialog
@@ -23,7 +24,7 @@ export default function OverrideConfirmationDialog(props: Props) {
           </div>
           <div className={styles.modalContainer}>
             <p className={styles.modalContent}>
-              For {props.day} you have date-specific availability defined on{' '}
+              For {day} you have date-specific availability defined on{' '}
               {props.count} date. Would you like to override this date?
             </p>
             <div className={styles.btnWrap}>

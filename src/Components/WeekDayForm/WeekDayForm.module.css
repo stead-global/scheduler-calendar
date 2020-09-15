@@ -1,0 +1,91 @@
+.formControlLabel {
+  display: flex;
+  height: 50px;
+  width: 100%;
+  padding: 0 11px 0 20px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border-radius: 8px;
+  justify-content: space-between;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  flex-direction: row-reverse;
+}
+
+.formControlLabel:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.formControlLabelText {
+  color: #646970;
+  font-family: inherit;
+  font-size: 17px;
+  letter-spacing: 0;
+  line-height: 20px;
+  font-weight: 500;
+  display: block;
+}
+
+.formControlLabelTextActive {
+  color: #5096e5;
+}
+
+.checkboxChecked {
+  width: 23px;
+  height: 23px;
+  border-radius: 11.5px;
+  background-color: #5096e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+.checkboxNotChecked {
+  border: 2px solid #d7d8da;
+  height: 25px;
+  width: 25px;
+  border-radius: 12.5px;
+}
+
+.largeBtn {
+  width: 100%;
+  border-radius: 8px;
+  background-color: #5096e5;
+  height: 54px;
+  font-family: inherit;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 35px;
+}
+
+.largeBtn:focus {
+  outline: none;
+  background-color: #3d80cb;
+}
+.largeBtn:hover {
+  background-color: #69a9f2;
+}
+
+.largeBtn:active {
+  background-color: #3d80cb;
+}
+
+.disableBtn {
+  background-color: #69a9f2;
+  pointer-events: none;
+}
+
+.tickSvg {
+  height: 9px;
+  width: 13px;
+}
