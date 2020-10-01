@@ -2,7 +2,8 @@ import React from 'react'
 import styles from './Calendar.module.css'
 import TopHeader from '../TopHeader/TopHeader'
 import TableHeader from '../TableHeader/TableHeader'
-import moment from 'moment'
+// eslint-disable-next-line no-unused-vars
+import moment, { Moment } from 'moment'
 import TableContent from '../TableContent/TableContent'
 import { getDateRangeTitle } from '../../Utils'
 import ViewModal from '../AvailabilityDialog/AvailabilityDialog'
@@ -147,17 +148,28 @@ export default class Calendar extends React.Component<
   }
 
   onHandleClickNext = () => {
-    this.setState({
-      date: moment(this.state.date)
+    let date: Date
+    if (this.state.minScreenWidth) {
+      date = moment(this.state.date)
         .add(this.state.numRowsRender * 7, 'days')
         .toDate()
+    } else {
+      date = moment(this.state.date).add(7, 'days').toDate()
+    }
+    this.setState({
+      date: date
     })
   }
 
   onHandleClickPrev = () => {
-    const date = moment(this.state.date)
-      .subtract(this.state.numRowsRender * 7, 'days')
-      .toDate()
+    let date: Date
+    if (this.state.minScreenWidth) {
+      date = moment(this.state.date)
+        .subtract(this.state.numRowsRender * 7, 'days')
+        .toDate()
+    } else {
+      date = moment(this.state.date).subtract(7, 'days').toDate()
+    }
     const isBefore = moment().endOf('week').isBefore(moment(this.state.date))
     if (isBefore) {
       this.setState({
@@ -167,11 +179,13 @@ export default class Calendar extends React.Component<
   }
 
   getDateRangLabel = () => {
-    const startDate = moment(this.state.date).startOf('week')
-    const endDate = moment(startDate).add(
-      this.state.numRowsRender * 7 - 1,
-      'days'
-    )
+    const startDate: Moment = moment(this.state.date).startOf('week')
+    let endDate: Moment
+    if (this.state.minScreenWidth) {
+      endDate = moment(startDate).add(this.state.numRowsRender * 7 - 1, 'days')
+    } else {
+      endDate = moment(startDate).endOf('week')
+    }
 
     return getDateRangeTitle(startDate, endDate)
   }
