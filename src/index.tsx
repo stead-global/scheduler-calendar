@@ -24,6 +24,7 @@ interface Props {
   topHeaderContainerStyle?: string
   topHeaderTitleStyle?: string
   is24hour?: boolean
+  isBusinessDays?: boolean
 }
 
 export default function SchedulerCalendar(props: Props) {
@@ -32,6 +33,7 @@ export default function SchedulerCalendar(props: Props) {
     availabilityStartDate,
     availabilityEndDate,
     availabilityRolling = 60,
+    isBusinessDays = false,
     duration,
     onIntervalChange,
     className,
@@ -73,6 +75,7 @@ export default function SchedulerCalendar(props: Props) {
       topHeaderContainerStyle={topHeaderContainerStyle}
       topHeaderTitleStyle={topHeaderTitleStyle}
       is24hour={is24hour}
+      isBusinessDays={isBusinessDays}
     />
   )
 }

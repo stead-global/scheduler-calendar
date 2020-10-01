@@ -40,6 +40,7 @@ interface CalendarProps {
   topHeaderContainerStyle?: string
   topHeaderTitleStyle?: string
   is24hour: boolean
+  isBusinessDays: boolean
 }
 
 interface CalendarState {
@@ -98,8 +99,8 @@ export default class Calendar extends React.Component<
   }
 
   getAvailibilityRangeData = () => {
-    let startDate: any
-    let endDate: any
+    let startDate: string
+    let endDate: string
 
     const availabilityType = this.props.availabilityType
     if (availabilityType === availabilityTypes.Rolling) {
@@ -107,6 +108,22 @@ export default class Calendar extends React.Component<
       endDate = moment()
         .add(this.props.availabilityRolling, 'days')
         .format('YYYY-MM-DD')
+      // to add weekend days to rooling days
+      if (this.props.isBusinessDays) {
+        const start: Date = moment(startDate, 'YYYY-MM-DD').toDate()
+        const end: Date = moment(endDate, 'YYYY-MM-DD').toDate()
+        let weekEndCount: number = 0
+        // eslint-disable-next-line no-unmodified-loop-condition
+        for (let d = start; d <= end; d.setDate(d.getDate() + 1)) {
+          if (d.getDay() === 0 || d.getDay() === 6) {
+            weekEndCount += 1
+          }
+        }
+        const numDays = this.props.availabilityRolling
+          ? this.props.availabilityRolling + weekEndCount
+          : weekEndCount
+        endDate = moment().add(numDays, 'days').format('YYYY-MM-DD')
+      }
     } else if (availabilityType === availabilityTypes.Range) {
       startDate = moment(this.props.availabilityStartDate, 'YYYY-MM-DD').format(
         'YYYY-MM-DD'
