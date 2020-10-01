@@ -17,6 +17,7 @@ interface Props {
   intervalsWrapStyle?: string
   is24hour: boolean
   availibilityRangeData: AvailibilityRangeData
+  isBusinessDays: boolean
 }
 
 interface State {}
@@ -138,7 +139,10 @@ export default class TableContent extends React.Component<Props, State> {
         !moment(currDayInMonth).isSameOrAfter(
           this.props.availibilityRangeData?.startDate,
           'day'
-        )
+        ) ||
+        (this.props.isBusinessDays &&
+          (currDayInMonth.toDate().getDay() === 0 ||
+            currDayInMonth.toDate().getDay() === 6))
           ? styles.disabledDay
           : undefined
       const currDay = moment(currDayInMonth).format()

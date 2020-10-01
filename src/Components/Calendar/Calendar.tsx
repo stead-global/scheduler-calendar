@@ -408,7 +408,8 @@ export default class Calendar extends React.Component<
       this.props.availabilityType !== prevProps.availabilityType ||
       this.props.availabilityStartDate !== prevProps.availabilityStartDate ||
       this.props.availabilityEndDate !== prevProps.availabilityEndDate ||
-      this.props.availabilityRolling !== prevProps.availabilityRolling
+      this.props.availabilityRolling !== prevProps.availabilityRolling ||
+      this.props.isBusinessDays !== prevProps.isBusinessDays
     if (propChanges) {
       this.getAvailibilityRangeData()
     }
@@ -432,7 +433,8 @@ export default class Calendar extends React.Component<
       intervalsWrapStyle,
       topHeaderContainerStyle,
       topHeaderTitleStyle,
-      is24hour
+      is24hour,
+      isBusinessDays
     } = this.props
     const initialRendersOfRow: number = initialRenderOfRows
       ? initialRenderOfRows + 1
@@ -476,6 +478,7 @@ export default class Calendar extends React.Component<
                   dayTextStyle={dayTextStyle}
                   intervalsWrapStyle={intervalsWrapStyle}
                   is24hour={is24hour}
+                  isBusinessDays={isBusinessDays}
                 />
               ) : (
                 <WeekCalendar
@@ -489,6 +492,7 @@ export default class Calendar extends React.Component<
                   dayTextStyle={dayTextStyle}
                   intervalsWrapStyle={intervalsWrapStyle}
                   is24hour={is24hour}
+                  isBusinessDays={isBusinessDays}
                 />
               )}
             </tbody>
