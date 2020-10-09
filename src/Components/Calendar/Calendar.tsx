@@ -111,19 +111,18 @@ export default class Calendar extends React.Component<
         .format('YYYY-MM-DD')
       // to add weekend days to rooling days
       if (this.props.isBusinessDays) {
-        const start: Date = moment(startDate, 'YYYY-MM-DD').toDate()
-        const end: Date = moment(endDate, 'YYYY-MM-DD').toDate()
-        let weekEndCount: number = 0
-        // eslint-disable-next-line no-unmodified-loop-condition
-        for (let d = start; d <= end; d.setDate(d.getDate() + 1)) {
-          if (d.getDay() === 0 || d.getDay() === 6) {
-            weekEndCount += 1
+        const rolling = this.props.availabilityRolling
+          ? this.props.availabilityRolling
+          : 0
+        const d = moment(startDate, 'YYYY-MM-DD').toDate()
+        let count = 0
+        while (count <= rolling) {
+          if (d.getDay() !== 0 && d.getDay() !== 6) {
+            count = count + 1
           }
+          d.setDate(d.getDate() + 1)
         }
-        const numDays = this.props.availabilityRolling
-          ? this.props.availabilityRolling + weekEndCount
-          : weekEndCount
-        endDate = moment().add(numDays, 'days').format('YYYY-MM-DD')
+        endDate = moment(d).format('YYYY-MM-DD')
       }
     } else if (availabilityType === availabilityTypes.Range) {
       startDate = moment(this.props.availabilityStartDate, 'YYYY-MM-DD').format(
