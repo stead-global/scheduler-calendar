@@ -22,7 +22,12 @@ import 'scheduler-calendar/dist/index.css'
 
 class Example extends Component {
   render() {
-    return <SchedulerCalendar />
+    return <SchedulerCalendar
+            availabilities={[{day: "mon", "slots": [{from: "11:00", to: "13:00"}]}, {day: "20/12/2020", "slots": [  {from: "11:00", to: "13:00"}]}]}
+            availabilityType={'rolling'}
+            duration={0}
+            onIntervalChange={() => {}}
+          />
   }
 }
 ```
@@ -34,7 +39,7 @@ class Example extends Component {
 | **`availabilities`**        | `Array`    | List of availabilities. Eg. `[{day: "mon", "slots": [{from: "11:00", to: "13:00"}]}]` |
 | **`duration`**              | `number`   | Minimum duration of time interval                                                     |
 | **`onIntervalChange`**      | `Function` | Callback when a interval is updated and it's contains the array of updated values     |
-| **`availabilityType`**      | `string`   | values must be `one of rolling or range or infinity`                                  |
+| **`availabilityType`**      | `string`   | values must be `one of rolling (for number of days) or range or infinity`                                  |
 | **`availabilityEndDate`**   | `Moment`   | end of date range when availability type is 'range'                                   |
 | **`availabilityStartDate`** | `Moment`   | start of date range when availability type is 'range'                                 |
 | **`availabilityRolling`**   | `number`   | number of rolling days when availability type is 'rolling'                            |
