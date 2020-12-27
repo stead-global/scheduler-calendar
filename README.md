@@ -2,14 +2,6 @@
 
 > Scheduler Calendar Component for React Js
 
-<img width="1172" alt="demo" src="https://user-images.githubusercontent.com/42475339/103169405-5335e280-4861-11eb-8835-f10f9c163084.png">
-
-<img width="755" alt="model" src="https://user-images.githubusercontent.com/42475339/103169413-6c3e9380-4861-11eb-8d62-5f92f3337a98.png">
-
-<img width="727" alt="multiple" src="https://user-images.githubusercontent.com/42475339/103169422-7cef0980-4861-11eb-9cbc-fc6463f9ca28.png">
-
-<img width="580" alt="responsive" src="https://user-images.githubusercontent.com/42475339/103169435-9001d980-4861-11eb-8570-0935986db9af.png">
-
 
 [![NPM](https://img.shields.io/npm/v/scheduler-calendar.svg)](https://www.npmjs.com/package/scheduler-calendar) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -61,6 +53,16 @@ class Example extends Component {
 | **`is24hour`**              | `boolean`  | Optional. true if time in 24 hours                                                    |
 | **`topHeaderStyle`**        | `string`   | Optional. to style header container                                                   |
 | **`isBusinessDays`**        | `boolean`  | Optional. to avoid sundays and saturdays in rolling days                              |
+
+## Screenshots
+
+<img width="1172" alt="demo" src="https://user-images.githubusercontent.com/42475339/103169405-5335e280-4861-11eb-8835-f10f9c163084.png">
+
+<img width="755" alt="model" src="https://user-images.githubusercontent.com/42475339/103169413-6c3e9380-4861-11eb-8d62-5f92f3337a98.png">
+
+<img width="727" alt="multiple" src="https://user-images.githubusercontent.com/42475339/103169422-7cef0980-4861-11eb-9cbc-fc6463f9ca28.png">
+
+<img width="580" alt="responsive" src="https://user-images.githubusercontent.com/42475339/103169435-9001d980-4861-11eb-8570-0935986db9af.png">
 
 ## License
 
