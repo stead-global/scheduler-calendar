@@ -18,6 +18,7 @@ interface Props {
   is24hour: boolean
   availibilityRangeData: AvailibilityRangeData
   isBusinessDays: boolean
+  isPastAvailabilityLocked: boolean
 }
 
 interface State {}
@@ -146,7 +147,12 @@ export default class TableContent extends React.Component<Props, State> {
           ? styles.disabledDay
           : undefined
       const currDay = moment(currDayInMonth).format()
-
+      const isClickable = !this.props.isPastAvailabilityLocked || !isDisabled
+      const handleOnDayClick = () => {
+        if (isClickable) {
+          this.props.onDayClick(currDay)
+        }
+      }
       daysToRender.push(
         <td
           key={currDayInMonth.format('DDMMYY')}
@@ -156,11 +162,12 @@ export default class TableContent extends React.Component<Props, State> {
             this.props.numRowsRender === rowNum && this.props.isCollapsed
               ? styles.lastWrap
               : '',
-            this.props.dayConstainerStyle
+            this.props.dayConstainerStyle,
+            this.props.isPastAvailabilityLocked && isDisabled
+              ? styles.blockClickEvents
+              : ''
           )}
-          onClick={() => {
-            this.props.onDayClick(currDay)
-          }}
+          onClick={handleOnDayClick}
         >
           <div className={styles.dayWrapper}>
             <span className={clsx(styles.dayNumber, this.props.dayTextStyle)}>

@@ -42,6 +42,7 @@ interface CalendarProps {
   topHeaderTitleStyle?: string
   is24hour: boolean
   isBusinessDays: boolean
+  isPastAvailabilityLocked: boolean
 }
 
 interface CalendarState {
@@ -447,7 +448,8 @@ export default class Calendar extends React.Component<
       topHeaderContainerStyle,
       topHeaderTitleStyle,
       is24hour,
-      isBusinessDays
+      isBusinessDays,
+      isPastAvailabilityLocked
     } = this.props
     const initialRendersOfRow: number = initialRenderOfRows
       ? initialRenderOfRows + 1
@@ -492,6 +494,7 @@ export default class Calendar extends React.Component<
                   intervalsWrapStyle={intervalsWrapStyle}
                   is24hour={is24hour}
                   isBusinessDays={isBusinessDays}
+                  isPastAvailabilityLocked={isPastAvailabilityLocked}
                 />
               ) : (
                 <WeekCalendar
@@ -506,6 +509,7 @@ export default class Calendar extends React.Component<
                   intervalsWrapStyle={intervalsWrapStyle}
                   is24hour={is24hour}
                   isBusinessDays={isBusinessDays}
+                  isPastAvailabilityLocked={isPastAvailabilityLocked}
                 />
               )}
             </tbody>
