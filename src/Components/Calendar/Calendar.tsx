@@ -36,7 +36,7 @@ interface CalendarProps {
   totalNumOfRows?: number
   tableContainerStyle?: string
   dayTextStyle?: string
-  dayConstainerStyle?: string
+  dayContainerStyle?: string
   intervalsWrapStyle?: string
   topHeaderContainerStyle?: string
   topHeaderTitleStyle?: string
@@ -442,7 +442,7 @@ export default class Calendar extends React.Component<
       initialRenderOfRows,
       className,
       tableContainerStyle,
-      dayConstainerStyle,
+      dayContainerStyle,
       dayTextStyle,
       intervalsWrapStyle,
       topHeaderContainerStyle,
@@ -489,7 +489,7 @@ export default class Calendar extends React.Component<
                   availibilityRangeData={availibilityRangeData}
                   availabilityData={this.state.availabilities}
                   isCollapsed={this.state.isCollapsedView}
-                  dayConstainerStyle={dayConstainerStyle}
+                  dayContainerStyle={dayContainerStyle}
                   dayTextStyle={dayTextStyle}
                   intervalsWrapStyle={intervalsWrapStyle}
                   is24hour={is24hour}
@@ -504,7 +504,7 @@ export default class Calendar extends React.Component<
                   availibilityRangeData={availibilityRangeData}
                   availabilityData={this.state.availabilities}
                   isCollapsed={this.state.isCollapsedView}
-                  dayConstainerStyle={dayConstainerStyle}
+                  dayContainerStyle={dayContainerStyle}
                   dayTextStyle={dayTextStyle}
                   intervalsWrapStyle={intervalsWrapStyle}
                   is24hour={is24hour}

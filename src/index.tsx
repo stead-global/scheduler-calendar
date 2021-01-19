@@ -19,7 +19,7 @@ interface Props {
   totalNumOfRows?: number
   tableContainerStyle?: string
   dayTextStyle?: string
-  dayConstainerStyle?: string
+  dayContainerStyle?: string
   intervalsWrapStyle?: string
   topHeaderContainerStyle?: string
   topHeaderTitleStyle?: string
@@ -41,7 +41,7 @@ export default function SchedulerCalendar(props: Props) {
     initialRenderOfRows,
     totalNumOfRows,
     tableContainerStyle,
-    dayConstainerStyle,
+    dayContainerStyle,
     dayTextStyle,
     intervalsWrapStyle,
     is24hour = false,
@@ -71,7 +71,7 @@ export default function SchedulerCalendar(props: Props) {
       initialRenderOfRows={initialRenderOfRows}
       totalNumOfRows={totalNumOfRows}
       tableContainerStyle={tableContainerStyle}
-      dayConstainerStyle={dayConstainerStyle}
+      dayContainerStyle={dayContainerStyle}
       dayTextStyle={dayTextStyle}
       intervalsWrapStyle={intervalsWrapStyle}
       topHeaderContainerStyle={topHeaderContainerStyle}

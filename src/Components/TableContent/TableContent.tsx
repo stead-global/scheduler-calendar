@@ -13,7 +13,7 @@ interface Props {
   availabilityData: Availabilities[]
   isCollapsed?: boolean
   dayTextStyle?: string
-  dayConstainerStyle?: string
+  dayContainerStyle?: string
   intervalsWrapStyle?: string
   is24hour: boolean
   availibilityRangeData: AvailibilityRangeData
@@ -162,7 +162,7 @@ export default class TableContent extends React.Component<Props, State> {
             this.props.numRowsRender === rowNum && this.props.isCollapsed
               ? styles.lastWrap
               : '',
-            this.props.dayConstainerStyle,
+            this.props.dayContainerStyle,
             this.props.isPastAvailabilityLocked && isDisabled
               ? styles.blockClickEvents
               : ''
