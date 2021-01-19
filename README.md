@@ -51,7 +51,7 @@ class Example extends Component {
 | **`initialRenderOfRows`**      | `number`   | Optional. number of rows to render at initial                                         |
 | **`totalNumOfRows`**           | `number`   | Optional. total number of rows for calendar                                           |
 | **`tableContainerStyle`**      | `string`   | Optional. to style calendar                                                           |
-| **`dayConstainerStyle`**       | `string`   | Optional. to style each cell of calendar                                              |
+| **`dayContainerStyle`**       | `string`   | Optional. to style each cell of calendar                                              |
 | **`dayTextStyle`**             | `string`   | Optional. to style day text                                                           |
 | **`intervalsWrapStyle`**       | `string`   | Optional. to style wrapper of interval shown in calendar                              |
 | **`is24hour`**                 | `boolean`  | Optional. true if time in 24 hours                                                    |

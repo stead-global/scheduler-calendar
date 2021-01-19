@@ -13,7 +13,7 @@ interface Props {
   availabilityData: Availabilities[]
   isCollapsed?: boolean
   dayTextStyle?: string
-  dayConstainerStyle?: string
+  dayContainerStyle?: string
   intervalsWrapStyle?: string
   is24hour: boolean
   availibilityRangeData: AvailibilityRangeData
@@ -152,7 +152,7 @@ export default class WeekCalendar extends React.Component<Props, State> {
         className={clsx(
           styles.td,
           isDisabled,
-          this.props.dayConstainerStyle,
+          this.props.dayContainerStyle,
           this.props.isPastAvailabilityLocked && isDisabled
             ? styles.blockClickEvents
             : ''
