@@ -86,3 +86,7 @@
 .intervalBlock:last-child {
   margin-bottom: 0;
 }
+
+.blockClickEvents {
+  cursor: not-allowed;
+}

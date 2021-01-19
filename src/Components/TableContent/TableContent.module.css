@@ -95,3 +95,7 @@
     padding: 0 8px;
   }
 }
+
+.blockClickEvents {
+  cursor: not-allowed;
+}

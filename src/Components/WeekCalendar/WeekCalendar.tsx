@@ -18,6 +18,7 @@ interface Props {
   is24hour: boolean
   availibilityRangeData: AvailibilityRangeData
   isBusinessDays: boolean
+  isPastAvailabilityLocked: boolean
 }
 
 interface State {}
@@ -139,14 +140,24 @@ export default class WeekCalendar extends React.Component<Props, State> {
         ? styles.disabledDay
         : undefined
     const currDay = moment(currDayInMonth).format()
-
+    const isClickable = !this.props.isPastAvailabilityLocked || !isDisabled
+    const handleOnDayClick = () => {
+      if (isClickable) {
+        this.props.onDayClick(currDay)
+      }
+    }
     daysToRender.push(
       <td
         key={currDayInMonth.format('DDMMYY')}
-        className={clsx(styles.td, isDisabled, this.props.dayConstainerStyle)}
-        onClick={() => {
-          this.props.onDayClick(currDay)
-        }}
+        className={clsx(
+          styles.td,
+          isDisabled,
+          this.props.dayConstainerStyle,
+          this.props.isPastAvailabilityLocked && isDisabled
+            ? styles.blockClickEvents
+            : ''
+        )}
+        onClick={handleOnDayClick}
       >
         <div className={styles.dayWrapper}>
           <span className={styles.weekDayWrap}>
