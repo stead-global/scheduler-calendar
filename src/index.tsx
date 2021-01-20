@@ -25,7 +25,7 @@ interface Props {
   topHeaderTitleStyle?: string
   is24hour?: boolean
   isBusinessDays?: boolean
-  isPastAvailabilityLocked?: boolean
+  isDisabledDateLocked?: boolean
 }
 
 export default function SchedulerCalendar(props: Props) {
@@ -47,7 +47,7 @@ export default function SchedulerCalendar(props: Props) {
     is24hour = false,
     topHeaderContainerStyle,
     topHeaderTitleStyle,
-    isPastAvailabilityLocked = false
+    isDisabledDateLocked = false
   } = props
 
   const [availabilitiesData, setAvailabilitiesData] = React.useState(
@@ -78,7 +78,7 @@ export default function SchedulerCalendar(props: Props) {
       topHeaderTitleStyle={topHeaderTitleStyle}
       is24hour={is24hour}
       isBusinessDays={isBusinessDays}
-      isPastAvailabilityLocked={isPastAvailabilityLocked}
+      isDisabledDateLocked={isDisabledDateLocked}
     />
   )
 }

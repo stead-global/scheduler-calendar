@@ -18,7 +18,7 @@ interface Props {
   is24hour: boolean
   availibilityRangeData: AvailibilityRangeData
   isBusinessDays: boolean
-  isPastAvailabilityLocked: boolean
+  isDisabledDateLocked: boolean
 }
 
 interface State {}
@@ -140,7 +140,7 @@ export default class WeekCalendar extends React.Component<Props, State> {
         ? styles.disabledDay
         : undefined
     const currDay = moment(currDayInMonth).format()
-    const isClickable = !this.props.isPastAvailabilityLocked || !isDisabled
+    const isClickable = !this.props.isDisabledDateLocked || !isDisabled
     const handleOnDayClick = () => {
       if (isClickable) {
         this.props.onDayClick(currDay)
@@ -153,7 +153,7 @@ export default class WeekCalendar extends React.Component<Props, State> {
           styles.td,
           isDisabled,
           this.props.dayContainerStyle,
-          this.props.isPastAvailabilityLocked && isDisabled
+          this.props.isDisabledDateLocked && isDisabled
             ? styles.blockClickEvents
             : ''
         )}
