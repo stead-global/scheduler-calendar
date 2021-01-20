@@ -24,14 +24,27 @@ class Example extends Component {
   render() {
     return (
       <SchedulerCalendar
-        availabilities={[
-          { day: 'mon', slots: [{ from: '11:00', to: '13:00' }] },
-          { day: '20/12/2020', slots: [{ from: '11:00', to: '13:00' }] }
-        ]}
-        availabilityType={'rolling'}
-        duration={0}
-        onIntervalChange={() => {}}
-      />
+              availabilities={[
+                {
+                  day: "mon",
+                  slots: [
+                    {from: '09:00', to: '10:30'},
+                    {from: '11:30', to: '13:00'},
+                    {from: '14:30', to: '17:00'},
+                  ]
+                },
+                {
+                  day: "2021-01-26",
+                  slots: [
+                    {from: '09:00', to: '10:30'},
+                    {from: '11:30', to: '19:00'},
+                  ]
+                },
+              ]}
+              availabilityType={'infinity'}
+              duration={10}
+              onIntervalChange={() => {}}
+            />
     )
   }
 }
@@ -57,7 +70,7 @@ class Example extends Component {
 | **`is24hour`**                 | `boolean`  | Optional. true if time in 24 hours                                                    |
 | **`topHeaderStyle`**           | `string`   | Optional. to style header container                                                   |
 | **`isBusinessDays`**           | `boolean`  | Optional. to avoid sundays and saturdays in rolling days                              |
-| **`isPastAvailabilityLocked`** | `boolean`  | Optional. to turn off changing the availability for past date                         |
+| **`isDisabledDateLocked`** | `boolean`  | Optional. to turn off changing the availability for past date                         |
 
 ## Screenshots
 
