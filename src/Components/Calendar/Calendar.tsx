@@ -516,6 +516,8 @@ export default class Calendar extends React.Component<
                   is24hour={is24hour}
                   isBusinessDays={isBusinessDays}
                   isDisabledDateLocked={isDisabledDateLocked}
+                  stylesOfDay={stylesOfDay}
+                  intervalStyles={intervalStyles}
                 />
               )}
             </tbody>
