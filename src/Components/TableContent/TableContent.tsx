@@ -14,6 +14,8 @@ interface Props {
   isCollapsed?: boolean
   dayTextStyle?: string
   dayContainerStyle?: string
+  stylesOfDay?: (day: string, available: boolean, isRolling: boolean) => Object;
+  intervalStyles?: Object;
   intervalsWrapStyle?: string
   is24hour: boolean
   availibilityRangeData: AvailibilityRangeData
@@ -76,6 +78,7 @@ export default class TableContent extends React.Component<Props, State> {
                   styles.intervalBlock,
                   this.props.intervalsWrapStyle
                 )}
+                style={this.props.intervalStyles}
               >{`${startTime} - ${endTime}`}</span>
             )
           } else {
@@ -167,6 +170,12 @@ export default class TableContent extends React.Component<Props, State> {
               ? styles.blockClickEvents
               : ''
           )}
+          style={this.props.stylesOfDay && 
+            this.props.stylesOfDay(
+              currDayInMonth.format(), 
+              dayIntervalData.length>0,
+              !isDisabled
+            )}
           onClick={handleOnDayClick}
         >
           <div className={styles.dayWrapper}>
