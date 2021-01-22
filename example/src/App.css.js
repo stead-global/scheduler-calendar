@@ -1,20 +1,20 @@
 export default {
     container: {
-        backgroundColor: '#ffb5b5'
+        // backgroundColor: '#ffb5b5'
     },
     availableContainer: {
-        color: '#5096e5',
+        // color: '#5096e5',
     },
     emptyContainer :{
-        color: 'red'
+        // color: 'red'
     },
     sundayContainer: {
-        color: 'green'
+        // color: 'green'
     },
     disabledContainer: {
-        color: '#afb2b6'
+        // color: '#afb2b6'
     },
     intervals: {
-        color: '#5096e5'
+        // color: '#5096e5'
     },
 }
