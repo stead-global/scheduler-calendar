@@ -6,12 +6,12 @@ import Styles from './App.css.js'
 import moment from 'moment'
 
 const App = () => {
-  const stylesOfDay = (day: string, available: boolean, _isRolling?: boolean ) => {
-    if(!_isRolling)
+  const stylesOfDay = (day: string, isAvailable: boolean, isRolling?: boolean ) => {
+    if(!isRolling)
       return Styles.disabledContainer
     if(moment(day).weekday() === 0)
       return {...Styles.container ,...Styles.sundayContainer}
-    if(available)
+    if(isAvailable)
       return {...Styles.container ,...Styles.availableContainer};
     else
       return {...Styles.container ,...Styles.emptyContainer};
