@@ -19,6 +19,8 @@ interface Props {
   availibilityRangeData: AvailibilityRangeData
   isBusinessDays: boolean
   isDisabledDateLocked: boolean
+  stylesOfDay?: (day: string, available: boolean, isRolling: boolean) => Object;
+  intervalStyles?: Object;
 }
 
 interface State {}
@@ -75,6 +77,7 @@ export default class WeekCalendar extends React.Component<Props, State> {
                   styles.intervalBlock,
                   this.props.intervalsWrapStyle
                 )}
+                style={this.props.intervalStyles}
               >{`${startTime} - ${endTime}`}</span>
             )
           } else {
@@ -157,6 +160,12 @@ export default class WeekCalendar extends React.Component<Props, State> {
             ? styles.blockClickEvents
             : ''
         )}
+        style={this.props.stylesOfDay && 
+          this.props.stylesOfDay(
+            currDayInMonth.format(), 
+            dayIntervalData.length>0,
+            !isDisabled
+          )}
         onClick={handleOnDayClick}
       >
         <div className={styles.dayWrapper}>
