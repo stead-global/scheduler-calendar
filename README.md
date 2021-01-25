@@ -71,6 +71,8 @@ class Example extends Component {
 | **`topHeaderStyle`**           | `string`   | Optional. to style header container                                                   |
 | **`isBusinessDays`**           | `boolean`  | Optional. to avoid sundays and saturdays in rolling days                              |
 | **`isDisabledDateLocked`** | `boolean`  | Optional. to turn off changing the availability for past date                         |
+| **`stylesOfDay`** | `Function`  | Optional. Callback with 3 parameters ( day: Date, isAvailable: Boolean, isRolling: Boolean ) for conditional styling                             |
+| **`intervalStyles`** | `Object`  | Optional. To style each intervals inside a cell                            |
 
 ## Screenshots
 
