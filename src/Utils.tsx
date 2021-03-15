@@ -11,7 +11,7 @@ export function getDateRangeTitle(start: any, end: any) {
   const endYear = moment(endDate).format('YYYY')
   const currentYear = moment().format('YYYY')
 
-  return `${startDay} ${startMonth !== endMonth ? startMonth : ''} ${
+  return `${startDay} ${(startMonth !== endMonth) || (currentYear !== startYear) ? startMonth : ''} ${
     startYear !== currentYear ? startYear : ''
   } - ${endDay} ${endMonth} ${endYear}`
 }

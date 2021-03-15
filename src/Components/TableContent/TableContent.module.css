@@ -4,10 +4,36 @@
   padding: 10px 0;
   position: relative;
   border-radius: 6px;
-  background-color: #f0f0f2;
+  background-color: #ffffff;
   box-sizing: border-box;
   cursor: pointer;
-  color: #121a24;
+  color: #333333;
+}
+
+.tdSmall {
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  position: relative;
+  border-radius: 6px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #333333;
+}
+
+.dayNumberSmallScreen {
+  width: 10%;
+  justify-content: flex-end;
+  text-align: center;
+  background-color: inherit;
+  display: flex;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 28px;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
 }
 
 .dayNumber {
@@ -15,11 +41,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: inherit;
-  font-size: 17px;
-  font-weight: 500;
-  letter-spacing: 0;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   line-height: 20px;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 19px;
+  text-align: center;
+}
+
+.dayWrapperSmall {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .dayWrapper {
@@ -28,10 +62,10 @@
 }
 
 .disabledDay {
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTU2cHgiIGhlaWdodD0iMTU2cHgiIHZpZXdCb3g9IjAgMCAxNTYgMTU2IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPHRpdGxlPkFydGJvYXJkPC90aXRsZT4KICAgIDxkZWZzPgogICAgICAgIDxyZWN0IGlkPSJwYXRoLTEiIHg9IjUuNjg0MzQxODllLTE0IiB5PSI1LjY4NDM0MTg5ZS0xNCIgd2lkdGg9IjE1NiIgaGVpZ2h0PSIxNTYiIHJ4PSI2Ij48L3JlY3Q+CiAgICAgICAgPHBhdHRlcm4gaWQ9InBhdHRlcm4tMiIgd2lkdGg9IjgiIGhlaWdodD0iOCIgeD0iLTgiIHk9Ii04IiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgICAgICAgPHVzZSB4bGluazpocmVmPSIjaW1hZ2UtMyIgdHJhbnNmb3JtPSJzY2FsZSgwLjI1LDAuMjUpIj48L3VzZT4KICAgICAgICA8L3BhdHRlcm4+CiAgICAgICAgPGltYWdlIGlkPSJpbWFnZS0zIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBQ0FBQUFBZ0NBWUFBQUJ6ZW5yMEFBQUFCR2RCVFVFQUFMR041ZklBS1FBQUFEaGxXRWxtVFUwQUtnQUFBQWdBQVlkcEFBUUFBQUFCQUFBQUdnQUFBQUFBQXFBQ0FBUUFBQUFCQUFBQUlLQURBQVFBQUFBQkFBQUFJQUFBQUFDUFRrREpBQUFBMDBsRVFWUllDY1hYdXcyRE1CQ0E0WUNRUjhnUVlRc2FEK3pLRFN4QmxzZ0lkcE03UzRtQ3dzT1BleUJab3Z2K3M2dnJuSE9yTVdheTFyNXVRcC8zL2g1Q21JRWJCdzA4eHJnQS9vRHo3SVNHVHN6djVJamo4R0lCZXpnK3UwakFFWTdYd2g1d2hyTUhYT0dzQVRrNFcwQXV6aEpRZ3BNSGxPS2tBVFU0V1VBdFRoTFFnamNIdE9KTkFSUjRkUUFWWGhWQWlSY0hVT05GQVJ4NGRnQVhuaFhBaVY4R2NPT25BUkw0WVlBVXZoc2dpZjhGU09PYkFBMzhHNkNGcHdCTkhBUDZ6NVlLLzJsWGs5NlNlNEJITFJ5SGZ3TXZaaUNSTy9FNnpRQUFBQUJKUlU1RXJrSmdnZz09Ij48L2ltYWdlPgogICAgPC9kZWZzPgogICAgPGcgaWQ9IkFydGJvYXJkIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjAuNSI+CiAgICAgICAgPGcgaWQ9IlJlY3RhbmdsZS1Db3B5Ij4KICAgICAgICAgICAgPHVzZSBmaWxsPSIjRkFGQUZDIiB4bGluazpocmVmPSIjcGF0aC0xIj48L3VzZT4KICAgICAgICAgICAgPHVzZSBmaWxsPSJ1cmwoI3BhdHRlcm4tMikiIHN0eWxlPSJtaXgtYmxlbmQtbW9kZTogbXVsdGlwbHk7IiB4bGluazpocmVmPSIjcGF0aC0xIj48L3VzZT4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==');
   background-size: cover;
+  background-color: #EDEEF2;
   background-repeat: no-repeat;
-  color: #afb2b6;
+  color: #8C94A1;
 }
 
 .intervalsWrap {
@@ -40,13 +74,19 @@
   align-items: center;
 }
 
+.intervalsWrapSmall {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .lastWrap {
   box-sizing: border-box;
   pointer-events: none;
-  background-color: #e3e3e547;
-  height: 140px;
+  background-color: #ffffff;
+  height: 156px;
   padding-bottom: 0;
-  max-height: 140px;
 }
 
 .intervalMoreBlock {
@@ -58,27 +98,44 @@
   font-size: 13px;
   letter-spacing: 0;
   line-height: 15px;
-  color: #5096e5;
+  color: #8C94A1;
   font-weight: 500;
 }
 
-.intervalBlock {
-  border: 2px solid #e3e3e5;
+.intervalBlockSmall {
   border-radius: 14px;
-  background-color: #ffffff;
-  padding: 0 2px;
-  color: #5096e5;
+  background-color: #F5F6F7;
+  padding: 0 14px;
+  color: #8C94A1;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.19px;
   font-size: 14px;
-  height: 28px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 500;
-  letter-spacing: 0;
   line-height: 26px;
   text-align: center;
-  display: block;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+}
+
+.intervalBlock {
+  border-radius: 14px;
+  background-color: #F5F6F7;
+  padding: 0 2px;
+  color: #8C94A1;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.19px;
+  font-size: 14px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 26px;
+  text-align: center;
+  margin-bottom: 6px;
 }
 .intervalBlock:last-child {
   margin-bottom: 0;
@@ -98,4 +155,20 @@
 
 .blockClickEvents {
   cursor: not-allowed;
+}
+
+
+.webScreenDayWrap {
+  margin-top: 16px;
+}
+
+.weekDayWrap {
+  width: 10%;
+  display: flex;
+  justify-content: flex-start;
+  color: #909499;
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 28px;
 }

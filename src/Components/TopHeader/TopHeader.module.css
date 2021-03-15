@@ -1,5 +1,5 @@
-.justifyContentSpaceBtw {
-  justify-content: space-between;
+.justifyContentCenter {
+  justify-content: center;
   display: flex;
   align-items: center;
 }
@@ -9,7 +9,8 @@
 }
 
 .topHeaderWrap {
-  margin-bottom: 25px;
+  margin-bottom: 50px;
+  user-select: none;
 }
 
 .availabilityTitle {
@@ -23,12 +24,12 @@
 }
 
 .topHeaderDateRange {
-  color: #121a24;
-  font-family: inherit;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  color: #333333;
   font-size: 20px;
-  letter-spacing: 0;
-  line-height: 24px;
-  font-weight: 500;
+  font-weight: bold;
+  letter-spacing: -0.26px;
+  line-height: 25px;
 }
 
 .topNavigatorsWrapper {
@@ -49,6 +50,16 @@
   cursor: pointer;
 }
 
+.todayWrap {
+  height: 100%;
+  position: absolute;
+  left: -55px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+}
+
 .topHeaderNavigators {
   border: 2px solid #d9dde0;
   border-radius: 5px;
@@ -59,15 +70,19 @@
   user-select: none;
 }
 
-.navigatorInnerWrap:first-child {
+/* .navigatorInnerWrap:first-child {
   border-right: 2px solid #d9dde0;
-}
+} */
 
 .navigatorInnerWrap {
   box-sizing: border-box;
   width: 38px;
-  color: #5096e5;
-  background-color: #ffffff;
+  height: 38px;
+  color: #8C94A1;
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #EDEEF2;
+
 }
 .navigatorInnerWrap span {
   display: flex;
@@ -78,15 +93,20 @@
   background-color: #f9f9fa;
 }
 
-.navigatorInnerWrapLeft {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+.titleWrap {
+  min-width: 250px;
+  padding: 0 20px;
 }
 
-.navigatorInnerWrapRight {
+.leftArrowWrap {
+  position: relative;
+  height: 38px;
+}
+
+/* .navigatorInnerWrapRight {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-}
+} */
 
 .leftArrow {
   box-sizing: border-box;

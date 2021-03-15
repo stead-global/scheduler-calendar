@@ -1,104 +1,105 @@
 /* eslint-disable react/jsx-boolean-value */
-import React from 'react'
-import styles from './AddIntervalSection.module.css'
-import clsx from 'clsx'
-import { Formik, FieldArray, Field } from 'formik'
-import moment from 'moment'
-import { getTimeFromText } from '../../Utils'
-import DeleteSvg from '../../assets/Icons/DeleteSvg'
+import React from "react";
+import styles from "./AddIntervalSection.module.css";
+import clsx from "clsx";
+import { Formik, FieldArray, Field } from "formik";
+import moment from "moment";
+import { getTimeFromText } from "../../Utils";
+import DeleteSvg from "../../assets/Icons/DeleteSvg";
 // eslint-disable-next-line no-unused-vars
-import { AvailabilityIntervals, Availabilities } from '../../Interfaces'
-import { AddSvg } from '../../assets/Icons/AddSvg'
-import Slide from '@material-ui/core/Slide'
-import BackArrowIcon from '../../assets/Icons/BackArrowIcon'
-import WeekDayForm from '../WeekDayForm/WeekDayForm'
+import { AvailabilityIntervals, Availabilities } from "../../Interfaces";
+import { AddSvg } from "../../assets/Icons/AddSvg";
+import Slide from "@material-ui/core/Slide";
+import BackArrowIcon from "../../assets/Icons/BackArrowIcon";
+import WeekDayForm from "../WeekDayForm/WeekDayForm";
+import CloseSvg from "../../assets/Icons/CloseSvg";
 
 interface Props {
-  onClose: () => void
-  onFormSubmit: (value: Availabilities[], period: PeriodsOfDay) => void
-  intervalDetails: any
-  formValues: AvailabilityIntervals[]
-  is24hour: boolean
+  onClose: () => void;
+  onFormSubmit: (value: Availabilities[], period: PeriodsOfDay) => void;
+  intervalDetails: any;
+  formValues: AvailabilityIntervals[];
+  is24hour: boolean;
 }
 
 interface State {
-  errors: any
-  isApplyToMultiple: boolean
-  showIntervalSection: boolean
+  errors: any;
+  isApplyToMultiple: boolean;
+  showIntervalSection: boolean;
 }
 
 export enum PeriodsOfDay {
   // eslint-disable-next-line no-unused-vars
-  SINGLE = 'singleDay',
+  SINGLE = "singleDay",
   // eslint-disable-next-line no-unused-vars
-  ALL = 'allDay'
+  ALL = "allDay",
 }
 
 class AddIntervalSection extends React.Component<Props, State> {
   constructor(props: Props) {
-    super(props)
+    super(props);
     this.state = {
       errors: {} as any,
       isApplyToMultiple: false,
-      showIntervalSection: true
-    } as State
+      showIntervalSection: true,
+    } as State;
   }
 
   handleSubmit = (values: any, day: string[], period: PeriodsOfDay) => {
-    const intervals = values.intervals
+    const intervals = values.intervals;
     const availabilities = day.map((item: string) => {
       return {
         day: item,
-        slots: intervals
-      }
-    })
-    this.props.onFormSubmit(availabilities, period)
-  }
+        slots: intervals,
+      };
+    });
+    this.props.onFormSubmit(availabilities, period);
+  };
 
   validateIntervals = (interval: any, values: any) => {
-    const duration = this.props.intervalDetails.duration
+    const duration = this.props.intervalDetails.duration;
 
     if (!interval.from && !interval.to) {
-      return 'Start time cannot be blank.'
+      return "Start time cannot be blank.";
     }
 
     if (interval.from && !interval.to) {
-      return 'End time cannot be blank.'
+      return "End time cannot be blank.";
     }
 
     const startTime = this.props.is24hour
-      ? moment(interval.from, 'HH:mm')
-      : moment(interval.from, 'hh:mm a')
+      ? moment(interval.from, "HH:mm")
+      : moment(interval.from, "hh:mm a");
     const endTime = this.props.is24hour
-      ? moment(interval.to, 'HH:mm')
-      : moment(interval.to, 'hh:mm a')
+      ? moment(interval.to, "HH:mm")
+      : moment(interval.to, "hh:mm a");
 
-    const durationDiffrnc = endTime.diff(startTime, 'minutes')
+    const durationDiffrnc = endTime.diff(startTime, "minutes");
 
     if (durationDiffrnc < duration && durationDiffrnc >= 0) {
-      return `Intervals must be at least ${duration} minutes.`
+      return `Intervals must be at least ${duration} minutes.`;
     }
 
     if (durationDiffrnc < 0) {
-      return `Your end time cannot be before your start time.`
+      return `Your end time cannot be before your start time.`;
     }
 
-    let errorMsg = ''
+    let errorMsg = "";
 
     values.forEach((item: any) => {
       const start = this.props.is24hour
-        ? moment(item.from, 'HH:mm')
-        : moment(item.from, 'hh:mm a')
+        ? moment(item.from, "HH:mm")
+        : moment(item.from, "hh:mm a");
       const end = this.props.is24hour
-        ? moment(item.to, 'HH:mm')
-        : moment(item.to, 'hh:mm a')
+        ? moment(item.to, "HH:mm")
+        : moment(item.to, "hh:mm a");
       if (endTime.isAfter(start) && startTime.isBefore(end)) {
-        errorMsg = 'Intervals are overlapping.'
+        errorMsg = "Intervals are overlapping.";
       }
-    })
+    });
 
-    return errorMsg
-  }
+    return errorMsg;
+  };
 
   onSubmitValidation = (
     values: any,
@@ -106,72 +107,75 @@ class AddIntervalSection extends React.Component<Props, State> {
     period?: PeriodsOfDay,
     isMulti?: boolean
   ) => {
-    const error: any = this.state.errors
+    const error: any = this.state.errors;
 
     if (values.intervals.length > 0) {
-      error.intervals = new Array(values.intervals.length).fill('')
+      error.intervals = new Array(values.intervals.length).fill("");
 
       values.intervals.forEach((item: any, index: number) => {
-        const currentIndex = index // indexOfCurrentInterval
+        const currentIndex = index; // indexOfCurrentInterval
         const filteredIntervals = values.intervals.filter(
           (_time: any, index: number) => index !== currentIndex
-        )
-        error.intervals[index] = this.validateIntervals(item, filteredIntervals)
-      })
+        );
+        error.intervals[index] = this.validateIntervals(
+          item,
+          filteredIntervals
+        );
+      });
     }
 
     const isEmpty =
       error.intervals &&
-      error.intervals.filter((item: any) => item !== '').length === 0
+      error.intervals.filter((item: any) => item !== "").length === 0;
     if (isEmpty) {
-      error.intervals = []
+      error.intervals = [];
     }
 
     if ((error.intervals && error.intervals.length === 0) || !error.intervals) {
       if (isMulti) {
-        this.setState({ isApplyToMultiple: true })
+        this.setState({ isApplyToMultiple: true });
       } else if (day && period) {
-        this.handleSubmit(values, day, period)
+        this.handleSubmit(values, day, period);
       }
     }
-    this.setState({ errors: error })
-  }
+    this.setState({ errors: error });
+  };
 
   resetAllErrorField = () => {
     // set errors as empty
     this.setState({
-      errors: {}
-    })
-  }
+      errors: {},
+    });
+  };
 
   resetErrorField = (index: number) => {
-    const errors = this.state.errors
+    const errors = this.state.errors;
     if (errors.intervals && errors.intervals[index]) {
-      errors.intervals[index] = ''
+      errors.intervals[index] = "";
       this.setState({
-        errors
-      })
+        errors,
+      });
     }
-  }
+  };
 
   _renderIntervalSection = () => {
-    const { errors, isApplyToMultiple, showIntervalSection } = this.state
+    const { errors, isApplyToMultiple, showIntervalSection } = this.state;
 
-    const intervalDate = moment(this.props.intervalDetails.day)
+    const intervalDate = moment(this.props.intervalDetails.day);
 
     const validate = (values: any) => {
-      this.onSubmitValidation(values)
-      const value: any = values
+      this.onSubmitValidation(values);
+      const value: any = values;
       value.intervals &&
         value.intervals.forEach((item: any) => {
-          item.from = getTimeFromText(item.from, this.props.is24hour)
-          item.to = getTimeFromText(item.to, this.props.is24hour)
-        })
-    }
+          item.from = getTimeFromText(item.from, this.props.is24hour);
+          item.to = getTimeFromText(item.to, this.props.is24hour);
+        });
+    };
     return (
       <Formik
         initialValues={{
-          intervals: JSON.parse(JSON.stringify([...this.props.formValues]))
+          intervals: JSON.parse(JSON.stringify([...this.props.formValues])),
         }}
         validateOnBlur={true}
         validateOnChange={false}
@@ -181,18 +185,11 @@ class AddIntervalSection extends React.Component<Props, State> {
         {({ values, handleChange, handleBlur, setFieldValue }: any) => {
           return (
             <form noValidate>
-              {showIntervalSection && (
-                <Slide
-                  direction='right'
-                  mountOnEnter
-                  unmountOnExit
-                  in={showIntervalSection}
-                  timeout={300}
-                >
+              {!isApplyToMultiple ? (
                   <div className={styles.intervalContainer}>
                     <div className={styles.modalTitle}>Edit Availability</div>
                     <FieldArray
-                      name='intervals'
+                      name="intervals"
                       render={(arrayHelpers) => (
                         <div className={clsx(styles.formBlock, styles.inputs)}>
                           {values.intervals.length !== 0 ? (
@@ -218,17 +215,13 @@ class AddIntervalSection extends React.Component<Props, State> {
                                   onFocus={() => this.resetErrorField(index)}
                                   value={values.intervals[index].from}
                                   placeholder={
-                                    this.props.is24hour ? 'HH:mm' : 'hh:mm am'
+                                    this.props.is24hour ? "HH:mm" : "hh:mm am"
                                   }
                                 />
-
-                                <div className={styles.sepratorWrap}>
-                                  <span className={styles.seprator} />
-                                </div>
                                 <Field
                                   className={clsx(
                                     styles.timeInput,
-                                    styles.marginRight25,
+                                    styles.marginRight10,
                                     errors.intervals && errors.intervals[index]
                                       ? styles.error
                                       : undefined
@@ -239,17 +232,17 @@ class AddIntervalSection extends React.Component<Props, State> {
                                   onFocus={() => this.resetErrorField(index)}
                                   value={values.intervals[index].to}
                                   placeholder={
-                                    this.props.is24hour ? 'HH:mm' : 'hh:mm am'
+                                    this.props.is24hour ? "HH:mm" : "hh:mm am"
                                   }
                                 />
                                 <div
                                   className={styles.deleteIcon}
                                   onClick={() => {
-                                    arrayHelpers.remove(index)
-                                    this.resetErrorField(index)
+                                    arrayHelpers.remove(index);
+                                    this.resetErrorField(index);
                                   }}
                                 >
-                                  <DeleteSvg />
+                                  <CloseSvg />
                                 </div>
                               </div>
                               {errors.intervals && errors.intervals[index] && (
@@ -265,7 +258,7 @@ class AddIntervalSection extends React.Component<Props, State> {
                           <div className={styles.container}>
                             <div
                               onClick={() => {
-                                arrayHelpers.push({ from: '', to: '' })
+                                arrayHelpers.push({ from: "", to: "" });
                               }}
                               className={styles.addBtn}
                             >
@@ -275,8 +268,8 @@ class AddIntervalSection extends React.Component<Props, State> {
                           <div className={styles.unavailableBtnWrap}>
                             <div
                               onClick={() => {
-                                setFieldValue('intervals', [])
-                                this.resetAllErrorField()
+                                setFieldValue("intervals", []);
+                                this.resetAllErrorField();
                               }}
                               className={clsx(
                                 styles.unavailableBtn,
@@ -290,34 +283,40 @@ class AddIntervalSection extends React.Component<Props, State> {
                           </div>
                           <div className={styles.container}>
                             <div className={styles.btnWrap}>
+                              <div className={styles.btnInnerWrap}>
+                                <button
+                                  type="button"
+                                  className={styles.largeBtn}
+                                  onClick={() =>
+                                    this.onSubmitValidation(
+                                      values,
+                                      [intervalDate.format("YYYY-MM-DD")],
+                                      PeriodsOfDay.SINGLE
+                                    )
+                                  }
+                                >
+                                  Apply to {intervalDate.format("DD MMM")} only
+                                </button>
+                                <button
+                                  type="button"
+                                  className={styles.largeBtn}
+                                  onClick={() =>
+                                    this.onSubmitValidation(
+                                      values,
+                                      [
+                                        intervalDate
+                                          .format("ddd")
+                                          .toLowerCase(),
+                                      ],
+                                      PeriodsOfDay.ALL
+                                    )
+                                  }
+                                >
+                                  Apply to all {intervalDate.format("dddd")}
+                                </button>
+                              </div>
                               <button
-                                type='button'
-                                className={styles.largeBtn}
-                                onClick={() =>
-                                  this.onSubmitValidation(
-                                    values,
-                                    [intervalDate.format('YYYY-MM-DD')],
-                                    PeriodsOfDay.SINGLE
-                                  )
-                                }
-                              >
-                                Apply to {intervalDate.format('DD MMM')} only
-                              </button>
-                              <button
-                                type='button'
-                                className={styles.largeBtn}
-                                onClick={() =>
-                                  this.onSubmitValidation(
-                                    values,
-                                    [intervalDate.format('ddd').toLowerCase()],
-                                    PeriodsOfDay.ALL
-                                  )
-                                }
-                              >
-                                Apply to all {intervalDate.format('dddd')}
-                              </button>
-                              <button
-                                type='button'
+                                type="button"
                                 className={styles.applyMultiple}
                                 onClick={() =>
                                   this.onSubmitValidation(
@@ -328,56 +327,37 @@ class AddIntervalSection extends React.Component<Props, State> {
                                   )
                                 }
                               >
-                                Apply to multiple
+                                or apply to multiple
                               </button>
                             </div>
                           </div>
                         </div>
                       )}
                     />
-                  </div>
-                </Slide>
-              )}
-              <Slide
-                direction='left'
-                in={isApplyToMultiple}
-                timeout={300}
-                mountOnEnter
-                unmountOnExit
-                onEntering={() => this.setState({ showIntervalSection: false })}
-                onExiting={() => this.setState({ showIntervalSection: true })}
-              >
-                <div className={styles.applyContainer}>
-                  <div className={styles.applyTitle}>
-                    <div
-                      className={styles.backArrow}
-                      onClick={() => {
-                        this.setState({ isApplyToMultiple: false })
-                      }}
-                    >
-                      <BackArrowIcon />
-                    </div>
-                    Apply to multiple
-                  </div>
+                  </div> ) :
+                (<div className={styles.applyContainer}>
+                  <div className={styles.applyTitle}>Apply to multiple</div>
                   <div className={styles.applyInnerContainer}>
                     <WeekDayForm
+                      onBack={() => {
+                        this.setState({ isApplyToMultiple: false });
+                      }}
                       onFormSubmit={(days: string[]) => {
-                        this.handleSubmit(values, days, PeriodsOfDay.ALL)
+                        this.handleSubmit(values, days, PeriodsOfDay.ALL);
                       }}
                     />
                   </div>
-                </div>
-              </Slide>
+                </div>)}
             </form>
-          )
+          );
         }}
       </Formik>
-    )
-  }
+    );
+  };
 
   render() {
-    return <div className={styles.root}>{this._renderIntervalSection()}</div>
+    return <div className={styles.root}>{this._renderIntervalSection()}</div>;
   }
 }
 
-export default AddIntervalSection
+export default AddIntervalSection;

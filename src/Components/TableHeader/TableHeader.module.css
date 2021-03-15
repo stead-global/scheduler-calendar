@@ -1,9 +1,9 @@
 .dayStyles {
-    opacity: 0.8;
-    color: #707d8a;
-    font-size: 16px;
-    letter-spacing: 0;
-    line-height: 22px;
-    text-align: center;
-    font-weight: 400;
-  }
+  color: #8c94a1;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 18px;
+  text-align: center;
+}

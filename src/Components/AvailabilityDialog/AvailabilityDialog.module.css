@@ -11,19 +11,24 @@
   position: relative;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 600px) {
   .modal {
-    width: 400px;
+    width: 500px;
   }
 }
 
 .closeIcon {
   position: absolute;
-  right: 20px;
-  top: 20px;
+  left: 10px;
+  top: 10px;
   color: #909499;
   cursor: pointer;
 }
 .closeIcon:hover {
   color: #646970;
+}
+
+.closeIcon svg {
+  height: 24px;
+  width: 24px;
 }

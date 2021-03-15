@@ -1,91 +1,144 @@
-.formControlLabel {
-  display: flex;
-  height: 50px;
+.btnWrap {
   width: 100%;
-  padding: 0 11px 0 20px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+}
+
+.btn {
+  border-radius: 6px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  background-color: #ffffff;
-  border-radius: 8px;
-  justify-content: space-between;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  flex-direction: row-reverse;
+  padding: 0 24px;
 }
 
-.formControlLabel:not(:last-child) {
-  margin-bottom: 12px;
-}
-
-.formControlLabelText {
-  color: #646970;
-  font-family: inherit;
-  font-size: 17px;
-  letter-spacing: 0;
-  line-height: 20px;
-  font-weight: 500;
-  display: block;
-}
-
-.formControlLabelTextActive {
-  color: #5096e5;
-}
-
-.checkboxChecked {
-  width: 23px;
-  height: 23px;
-  border-radius: 11.5px;
-  background-color: #5096e5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.btn.primary {
+  border: 2px solid rgba(34,104,224,0.46);
+  border-radius: 6px;
+  background-color: #3D8DF5;
   color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: -0.22px;
+  line-height: 17px;
+  text-align: center;
 }
 
-.checkboxNotChecked {
-  border: 2px solid #d7d8da;
-  height: 25px;
-  width: 25px;
-  border-radius: 12.5px;
-}
-
-.largeBtn {
-  width: 100%;
-  border-radius: 8px;
-  background-color: #5096e5;
-  height: 54px;
-  font-family: inherit;
-  color: #ffffff;
+.btn.secondary {
+  border-radius: 6px;
+  background-color: #EDEEF2;
+  color: #333333;
+  font-size: 14px;
   font-weight: 500;
-  font-size: 18px;
-  letter-spacing: 0;
-  line-height: 21px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
+  letter-spacing: -0.19px;
+  line-height: 17px;
+  text-align: center;
   border: none;
-  cursor: pointer;
-  margin-top: 35px;
-}
-
-.largeBtn:focus {
   outline: none;
-  background-color: #3d80cb;
-}
-.largeBtn:hover {
-  background-color: #69a9f2;
+  margin-right: 10px;
 }
 
-.largeBtn:active {
-  background-color: #3d80cb;
-}
 
 .disableBtn {
-  background-color: #69a9f2;
   pointer-events: none;
 }
 
-.tickSvg {
-  height: 9px;
-  width: 13px;
+.choiceWrap{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 1px rgba(90,99,112,0.16);
+}
+
+.lableWrap {
+  display: flex;
+  width: 100%;
+  height: 44px;
+  padding: 0 16px;
+  color: #333333;
+  font-size: 14px;
+  letter-spacing: -0.22px;
+  line-height: 17px;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 0 0 #EDEEF2, 0 1px 0 0 #EDEEF2;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.lableWrap input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkIcon {
+  position: absolute;
+  right: 18px;
+  top: 10px;
+  box-sizing: border-box;
+  height: 24px;
+  width: 24px;
+  border: 1.2px solid #C5C8CD;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lableWrap:hover{
+  background-color: #F5F6F7;
+}
+
+.choiceWrap .lableWrap:last-child {
+  box-shadow: none;
+  border-radius: 0 0 6px 6px;
+}
+
+.choiceWrap .lableWrap:first-child {
+  border-radius: 6px 6px 0 0;
+}
+
+.lableWrap input ~ .checkIcon .tickSvg {
+  display: none;
+}
+
+.lableWrap input:checked ~ .checkIcon .tickSvg {
+  display: block;
+}
+
+.checkIcon .addSvg {
+  height: 8px;
+  width: 8px;
+  color: #C5C8CD;
+}
+
+.checkIcon .tickSvg {
+  width: 12px;
+  height: 12px;
+  color: #ffffff;
+}
+
+.lableWrap input ~ .checkIcon .addSvg {
+  display: block;
+}
+
+.lableWrap input:checked ~ .checkIcon .addSvg {
+  display: none;
+}
+
+.lableWrap input:checked ~ .checkIcon {
+  border: 1px solid #73C765;
+  background-color: #7DD46E;
 }
