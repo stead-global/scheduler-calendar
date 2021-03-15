@@ -1,119 +1,113 @@
-import React from 'react'
-import styles from './WeekDayForm.module.css'
-import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
-import { TickSvg } from '../../assets/Icons/TickSvg'
-import clsx from 'clsx'
-import moment from 'moment'
+import React from "react";
+import styles from "./WeekDayForm.module.css";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import { TickSvg } from "../../assets/Icons/TickSvg";
+import clsx from "clsx";
+import moment from "moment";
+import { AddSvg } from "../../assets/Icons/AddSvg";
 
 interface Props {
-  className?: string
-  onFormSubmit: (value: string[]) => void
+  className?: string;
+  onFormSubmit: (value: string[]) => void;
+  onBack: () => void;
 }
 
 type WeekDays = {
-  id: number
-  label: string
-  value: boolean
-}
+  id: number;
+  label: string;
+  value: boolean;
+};
 
 export default function WeekDayForm(props: Props) {
-  const [state, setState] = React.useState<boolean>(false)
-  const [btnDisable, setBtnDisable] = React.useState<boolean>(true)
+  const [state, setState] = React.useState<boolean>(false);
+  const [btnDisable, setBtnDisable] = React.useState<boolean>(true);
   const [days, setDays] = React.useState<WeekDays[]>([
-    { id: 0, label: 'Sunday', value: false },
-    { id: 1, label: 'Monday', value: false },
-    { id: 2, label: 'Tuesday', value: false },
-    { id: 3, label: 'Wednesday', value: false },
-    { id: 4, label: 'Thursday', value: false },
-    { id: 5, label: 'Friday', value: false },
-    { id: 6, label: 'Saturday', value: false }
-  ])
+    { id: 0, label: "Sunday", value: false },
+    { id: 1, label: "Monday", value: false },
+    { id: 2, label: "Tuesday", value: false },
+    { id: 3, label: "Wednesday", value: false },
+    { id: 4, label: "Thursday", value: false },
+    { id: 5, label: "Friday", value: false },
+    { id: 6, label: "Saturday", value: false },
+  ]);
 
   const isButtonDisable = (week: WeekDays[]) => {
-    let disable: boolean = true
+    let disable: boolean = true;
     week.every((item: WeekDays) => {
       if (item.value) {
-        disable = false
-        return false
+        disable = false;
+        return false;
       }
-      return true
-    })
-    return disable
-  }
+      return true;
+    });
+    return disable;
+  };
 
   const onFormSubmit = (value: WeekDays[]) => {
-    const weeks: string[] = []
+    const weeks: string[] = [];
     value.forEach((item: WeekDays) => {
       if (item.value) {
-        weeks.push(moment(item.label, 'dddd').format('ddd').toLowerCase())
+        weeks.push(moment(item.label, "dddd").format("ddd").toLowerCase());
       }
-    })
-    props.onFormSubmit(weeks)
-  }
+    });
+    props.onFormSubmit(weeks);
+  };
 
   const handleSubmit = () => {
-    const disable = isButtonDisable(days)
-    setBtnDisable(disable)
+    const disable = isButtonDisable(days);
+    setBtnDisable(disable);
     if (!disable) {
-      onFormSubmit(days)
+      onFormSubmit(days);
     }
-  }
+  };
 
   const handleChange = (event: any) => {
     const week = days
-    week[Number(event.target.name)].value = event.target.checked
+    week[Number(event.target.value)].value = event.target.checked
     setDays(week)
     setState(!state)
     const disable = isButtonDisable(week)
     setBtnDisable(disable)
-  }
+  };
 
   return (
     <div className={clsx(styles.root, props.className)}>
-      <FormGroup>
+      <div className={styles.choiceWrap}>
         {days.map((item: WeekDays) => {
           return (
-            <FormControlLabel
-              className={styles.formControlLabel}
-              key={item.label}
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  name={item.id + ''}
-                  disableRipple
-                  color='default'
-                  checkedIcon={
-                    <span className={styles.checkboxChecked}>
-                      <TickSvg className={styles.tickSvg} />
-                    </span>
-                  }
-                  // className={styles.checkbox}
-                  icon={<span className={styles.checkboxNotChecked} />}
-                />
-              }
-              label={
-                <span
-                  className={clsx(
-                    styles.formControlLabelText,
-                    item.value && styles.formControlLabelTextActive
-                  )}
-                >
-                  {item.label}
-                </span>
-              }
-            />
-          )
+            <label className={styles.lableWrap} key={item.id + ""}>
+              {item.label}
+              <input
+                type={"checkbox"}
+                onChange={handleChange}
+                value={item.id}
+              />
+              <span className={styles.checkIcon}>
+                <AddSvg className={styles.addSvg} />
+                <TickSvg className={styles.tickSvg} />
+              </span>
+            </label>
+          );
         })}
-      </FormGroup>
+      </div>
+      <div className={styles.btnWrap}>
       <button
-        type='button'
-        className={clsx(styles.largeBtn, btnDisable && styles.disableBtn)}
-        onClick={handleSubmit}
-      >
-        Apply
-      </button>
+          type="button"
+          className={clsx(styles.btn, styles.secondary)}
+          onClick={props.onBack}
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          className={clsx(styles.btn, btnDisable && styles.disableBtn, styles.primary)}
+          onClick={handleSubmit}
+        >
+          Apply
+        </button>
+      </div>
     </div>
-  )
+  );
 }
