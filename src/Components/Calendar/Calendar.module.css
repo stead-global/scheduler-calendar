@@ -39,7 +39,7 @@
   font-weight: 500;
   position: relative;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 100px;
 }
 
 .showMoreWrap::after {
@@ -59,8 +59,8 @@
   bottom: 10px;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fafafc 44%);
-  height: 140px;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #F9F9FA 70%);
+  height: 156px;
 }
 
 .showMoreSvg {

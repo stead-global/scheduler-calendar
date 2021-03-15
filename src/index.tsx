@@ -28,6 +28,8 @@ interface Props {
   isDisabledDateLocked?: boolean
   stylesOfDay?: (day: string, available: boolean, isRolling: boolean) => object
   intervalStyles?: object
+  customHeaderComponent?: (dateRange: string) => void;
+  inputRef?: (ref: any) => void;
 }
 
 export default function SchedulerCalendar(props: Props) {
@@ -51,7 +53,9 @@ export default function SchedulerCalendar(props: Props) {
     topHeaderTitleStyle,
     isDisabledDateLocked = false,
     stylesOfDay,
-    intervalStyles
+    intervalStyles,
+    customHeaderComponent,
+    inputRef,
   } = props
 
   const [availabilitiesData, setAvailabilitiesData] = React.useState(
@@ -64,6 +68,7 @@ export default function SchedulerCalendar(props: Props) {
 
   return (
     <Calendar
+      ref={ref => inputRef ? inputRef(ref) : ''}
       availabilities={availabilitiesData}
       availabilityType={availabilityType}
       availabilityEndDate={moment(availabilityEndDate).format('YYYY-MM-DD')}
@@ -85,6 +90,7 @@ export default function SchedulerCalendar(props: Props) {
       isDisabledDateLocked={isDisabledDateLocked}
       stylesOfDay={stylesOfDay}
       intervalStyles={intervalStyles}
+      customHeaderComponent={customHeaderComponent}
     />
   )
 }
