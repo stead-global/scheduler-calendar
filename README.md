@@ -84,7 +84,10 @@ class Example extends Component {
 
 <img width="1680" alt="Screenshot 2021-03-15 at 7 05 38 PM" src="https://user-images.githubusercontent.com/42475339/111162101-d72a7b80-85c1-11eb-9a07-d58ac16f88d3.png">
 
+## Authors
 
+* [azadhmhd](https://github.com/azadhmhd)]
+* 
 ## License
 
-MIT © [azadhmhd](https://github.com/azadhmhd)
+MIT © Stead https://github.com/stead-global
