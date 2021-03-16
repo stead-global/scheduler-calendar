@@ -85,6 +85,9 @@ class Example extends Component {
 ## Authors
 
 * [azadhmhd](https://github.com/azadhmhd)
+* [Mishhub](https://github.com/Mishhub)
+* [Ashique-KV](https://github.com/ASHIQUE-KV)
+* [ayarshabeer](https://github.com/ayarshabeer)
 
 ## License
 
