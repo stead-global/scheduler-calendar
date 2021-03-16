@@ -4,9 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/scheduler-calendar.svg)](https://www.npmjs.com/package/scheduler-calendar) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-## Install
-
-To use the calendar you just need to:
+## Installation
 
 ```bash
 npm install --save scheduler-calendar
