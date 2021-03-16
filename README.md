@@ -87,7 +87,7 @@ class Example extends Component {
 ## Authors
 
 * [azadhmhd](https://github.com/azadhmhd)
-* 
+
 ## License
 
 MIT © Stead https://github.com/stead-global
