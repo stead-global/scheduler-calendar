@@ -88,4 +88,4 @@ class Example extends Component {
 
 ## License
 
-MIT © Stead https://github.com/stead-global
+MIT © [Stead](https://github.com/stead-global)
