@@ -1,3 +1,10 @@
+/**
+ * --------------------------------------------------------------------------
+ * Scheduler-calendar : ArrowLeftIcon.tsx
+ * Licensed under MIT (https://github.com/stead-global/scheduler-calendar/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
 import React from 'react'
 
 interface Props {

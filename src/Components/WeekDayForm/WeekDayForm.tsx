@@ -1,8 +1,12 @@
+/**
+ * --------------------------------------------------------------------------
+ * Scheduler-calendar : WeekDayForm.tsx
+ * Licensed under MIT (https://github.com/stead-global/scheduler-calendar/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
 import React from "react";
 import styles from "./WeekDayForm.module.css";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import { TickSvg } from "../../assets/Icons/TickSvg";
 import clsx from "clsx";
 import moment from "moment";

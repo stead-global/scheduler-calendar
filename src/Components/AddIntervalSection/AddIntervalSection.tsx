@@ -1,3 +1,10 @@
+/**
+ * --------------------------------------------------------------------------
+ * Scheduler-calendar : AddIntervalSection.tsx
+ * Licensed under MIT (https://github.com/stead-global/scheduler-calendar/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
 /* eslint-disable react/jsx-boolean-value */
 import React from "react";
 import styles from "./AddIntervalSection.module.css";
@@ -5,12 +12,9 @@ import clsx from "clsx";
 import { Formik, FieldArray, Field } from "formik";
 import moment from "moment";
 import { getTimeFromText } from "../../Utils";
-import DeleteSvg from "../../assets/Icons/DeleteSvg";
 // eslint-disable-next-line no-unused-vars
 import { AvailabilityIntervals, Availabilities } from "../../Interfaces";
 import { AddSvg } from "../../assets/Icons/AddSvg";
-import Slide from "@material-ui/core/Slide";
-import BackArrowIcon from "../../assets/Icons/BackArrowIcon";
 import WeekDayForm from "../WeekDayForm/WeekDayForm";
 import CloseSvg from "../../assets/Icons/CloseSvg";
 

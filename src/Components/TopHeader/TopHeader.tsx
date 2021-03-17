@@ -1,3 +1,10 @@
+/**
+ * --------------------------------------------------------------------------
+ * Scheduler-calendar : TopHeader.tsx
+ * Licensed under MIT (https://github.com/stead-global/scheduler-calendar/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
 import React from "react";
 import styles from "./TopHeader.module.css";
 import ArrowLeftIcon from "../../assets/Icons/ArrowLeftIcon";

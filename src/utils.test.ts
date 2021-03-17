@@ -1,4 +1,11 @@
 /**
+ * --------------------------------------------------------------------------
+ * Scheduler-calendar : test files
+ * Licensed under MIT (https://github.com/stead-global/scheduler-calendar/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+/**
  * @author Azad Mohamed
  * @file Test files
  */

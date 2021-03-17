@@ -1,3 +1,10 @@
+/**
+ * --------------------------------------------------------------------------
+ * Scheduler-calendar : TickSvg.tsx
+ * Licensed under MIT (https://github.com/stead-global/scheduler-calendar/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
 import * as React from "react";
 
 interface Props {

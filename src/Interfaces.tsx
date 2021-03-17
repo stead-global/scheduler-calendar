@@ -1,3 +1,10 @@
+/**
+ * --------------------------------------------------------------------------
+ * Scheduler-calendar : Interfaces.tsx
+ * Licensed under MIT (https://github.com/stead-global/scheduler-calendar/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
 export interface Availabilities {
   day: string
   slots: AvailabilityIntervals[]
