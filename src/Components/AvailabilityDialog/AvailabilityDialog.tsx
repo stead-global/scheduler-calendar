@@ -1,3 +1,10 @@
+/**
+ * --------------------------------------------------------------------------
+ * Scheduler-calendar : AvailabilityDialog.tsx
+ * Licensed under MIT (https://github.com/stead-global/scheduler-calendar/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
 import React from 'react'
 import styles from './AvailabilityDialog.module.css'
 import Dialog from '@material-ui/core/Dialog/Dialog'
