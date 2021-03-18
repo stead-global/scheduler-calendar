@@ -4,9 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/scheduler-calendar.svg)](https://www.npmjs.com/package/scheduler-calendar) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-## Install
-
-To use the calendar you just need to:
+## Installation
 
 ```bash
 npm install --save scheduler-calendar
@@ -71,17 +69,26 @@ class Example extends Component {
 | **`topHeaderStyle`**           | `string`   | Optional. to style header container                                                   |
 | **`isBusinessDays`**           | `boolean`  | Optional. to avoid sundays and saturdays in rolling days                              |
 | **`isDisabledDateLocked`** | `boolean`  | Optional. to turn off changing the availability for past date                         |
+| **`stylesOfDay`** | `Function`  | Optional. Callback with 3 parameters ( day: Date, isAvailable: Boolean, isRolling: Boolean ) for conditional styling                             |
+| **`intervalStyles`** | `Object`  | Optional. To style each intervals inside a cell                            |
+| **`customHeaderComponent`**           | `Function`    | Function to return custom header |
+| **`inputRef`**           | `any`    | Ref object |
 
 ## Screenshots
 
-<img width="1172" alt="demo" src="https://user-images.githubusercontent.com/42475339/103169405-5335e280-4861-11eb-8835-f10f9c163084.png">
+<img width="1680" alt="Screenshot 2021-03-15 at 7 05 15 PM" src="https://user-images.githubusercontent.com/42475339/111161800-86b31e00-85c1-11eb-9915-d057f1203c77.png">
 
-<img width="755" alt="model" src="https://user-images.githubusercontent.com/42475339/103169413-6c3e9380-4861-11eb-8d62-5f92f3337a98.png">
+<img width="1680" alt="Screenshot 2021-03-15 at 7 05 25 PM" src="https://user-images.githubusercontent.com/42475339/111162058-c7129c00-85c1-11eb-9d4f-abe830d8f8e8.png">
 
-<img width="727" alt="multiple" src="https://user-images.githubusercontent.com/42475339/103169422-7cef0980-4861-11eb-9cbc-fc6463f9ca28.png">
+<img width="1680" alt="Screenshot 2021-03-15 at 7 05 38 PM" src="https://user-images.githubusercontent.com/42475339/111162101-d72a7b80-85c1-11eb-9a07-d58ac16f88d3.png">
 
-<img width="580" alt="responsive" src="https://user-images.githubusercontent.com/42475339/103169435-9001d980-4861-11eb-8570-0935986db9af.png">
+## Authors
+
+* [azadhmhd](https://github.com/azadhmhd)
+* [Mishhub](https://github.com/Mishhub)
+* [Ashique-KV](https://github.com/ASHIQUE-KV)
+* [ayarshabeer](https://github.com/ayarshabeer)
 
 ## License
 
-MIT © [azadhmhd](https://github.com/azadhmhd)
+MIT © [Stead](https://github.com/stead-global)
