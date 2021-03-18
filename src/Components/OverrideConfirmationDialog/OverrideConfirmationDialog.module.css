@@ -6,11 +6,13 @@
  */
 
 .modalTitle {
-  color: #142438;
+  text-align: center;
+  color: #333333;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   font-size: 22px;
-  font-weight: 500;
-  letter-spacing: -0.42px;
-  line-height: 27px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 30px;
   text-align: center;
   margin-bottom: 25px;
   padding: 0 40px;
@@ -37,24 +39,14 @@
   }
 }
 
-.closeIcon {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  color: #909499;
-  cursor: pointer;
-}
-.closeIcon:hover {
-  color: #646970;
-}
 
 .modalContent {
-  color: #121a24;
+  color: #333333;
   font-size: 17px;
   letter-spacing: 0;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   line-height: 24px;
   text-align: center;
-  font-family: inherit;
   margin: 0 0 35px 0;
 }
 
@@ -69,25 +61,26 @@
 .btnWrap .secondaryBtn {
   width: 50%;
   margin: 0 5px;
-  height: 54px;
+  height: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: inherit;
-  font-size: 18px;
-  letter-spacing: 0;
-  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: -0.22px;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  border-radius: 6px;
   line-height: 21px;
   cursor: pointer;
 }
 
 .btnWrap .primaryBtn {
   color: #ffffff;
-  border: 2px solid #5096e5;
-  background-color: #5096e5;
+  border: 2px solid rgba(34,104,224,0.46);
+  background-color: #3D8DF5;
 }
 .btnWrap .primaryBtn:hover {
-  background-color: #69a9f2;
+  background-color: #5096E5;
 }
 
 .btnWrap .primaryBtn:focus,
@@ -97,14 +90,14 @@
 }
 
 .btnWrap .secondaryBtn {
-  border: 2px solid #d7d8da;
+  border: 2px solid #909499;
   background-color: #ffffff;
   color: #5096e5;
 }
 .btnWrap.secondaryBtn:hover,
 .btnWrap.secondaryBtn:active,
 .btnWrap.secondaryBtn:focus {
-  background-color: #f9f9fa;
+  background-color: #E3E5E7;
   outline: none;
 }
 
