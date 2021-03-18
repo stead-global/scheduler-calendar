@@ -8,7 +8,6 @@
 /* interval */
 .root {
   width: 100%;
-  font-family: inherit;
   padding: 30px 16px 25px 16px;
 }
 
@@ -78,8 +77,8 @@
   color: #121a24;
   font-weight: 500;
   font-size: 17px;
-  font-family: inherit;
   letter-spacing: 0;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   line-height: 32px;
   height: 40px;
   display: flex;
@@ -88,8 +87,8 @@
 }
 
 .timeInput::placeholder {
-  font-family: inherit;
   line-height: 20px;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   color: #C5C8CD;
   font-size: 14px;
   letter-spacing: -0.21px;
@@ -115,8 +114,8 @@
   font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.19px;
-  font-family: inherit;
   line-height: 22px;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   cursor: pointer;
   margin-bottom: 25px;
   display: flex;
@@ -135,6 +134,7 @@
   justify-content: center;
   border: 1px dashed #d7d8da;
   color: #d7d8da;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   line-height: 32px;
   font-size: 17px;
   letter-spacing: 0;
@@ -207,12 +207,12 @@
 
 .btnWrap .largeBtn {
   width: 100%;
-  font-family: inherit;
   color: #ffffff;
   border: 2px solid rgba(34,104,224,0.46);
   border-radius: 6px;
   background-color: #3D8DF5;
   line-height: 21px;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   height: 36px;
   display: flex;
   align-items: center;
@@ -240,11 +240,11 @@
 
 .errorMsg {
   color: #ed4545;
-  font-family: inherit;
   margin-top: 5px;
   font-size: 13px;
   letter-spacing: 0;
   line-height: 15px;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
 }
 
 .deleteIcon {
@@ -318,6 +318,7 @@
   letter-spacing: 0;
   line-height: 36px;
   text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   position: relative;
   margin-bottom: 25px;
 }

@@ -29,7 +29,6 @@ interface Props {
 interface State {
   errors: any;
   isApplyToMultiple: boolean;
-  showIntervalSection: boolean;
 }
 
 export enum PeriodsOfDay {
@@ -45,7 +44,6 @@ class AddIntervalSection extends React.Component<Props, State> {
     this.state = {
       errors: {} as any,
       isApplyToMultiple: false,
-      showIntervalSection: true,
     } as State;
   }
 
@@ -163,7 +161,7 @@ class AddIntervalSection extends React.Component<Props, State> {
   };
 
   _renderIntervalSection = () => {
-    const { errors, isApplyToMultiple, showIntervalSection } = this.state;
+    const { errors, isApplyToMultiple} = this.state;
 
     const intervalDate = moment(this.props.intervalDetails.day);
 

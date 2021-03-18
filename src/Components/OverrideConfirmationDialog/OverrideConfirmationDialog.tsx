@@ -7,7 +7,7 @@
 
 import React from 'react'
 import styles from './OverrideConfirmationDialog.module.css'
-import Dialog from '@material-ui/core/Dialog/Dialog'
+import Modal from '../Modal/Modal'
 
 interface Props {
   visible: boolean
@@ -19,11 +19,8 @@ interface Props {
 export default function OverrideConfirmationDialog(props: Props) {
   const day = props.day?.join(', ')
   return (
-    <div>
-      <Dialog
-        open={props.visible}
-        aria-labelledby='Time-interval-modal'
-        aria-describedby='Time-interval-modal'
+      <Modal
+        visible={props.visible}
       >
         <div className={styles.modal}>
           <div className={styles.modalTitle}>
@@ -52,7 +49,6 @@ export default function OverrideConfirmationDialog(props: Props) {
             </div>
           </div>
         </div>
-      </Dialog>
-    </div>
+      </Modal>
   )
 }

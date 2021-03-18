@@ -7,12 +7,12 @@
 
 import React from 'react'
 import styles from './AvailabilityDialog.module.css'
-import Dialog from '@material-ui/core/Dialog/Dialog'
 import AddIntervalSection, {
   // eslint-disable-next-line no-unused-vars
   PeriodsOfDay
 } from '../AddIntervalSection/AddIntervalSection'
 import CloseSvg from '../../assets/Icons/CloseSvg'
+import Modal from '../Modal/Modal'
 
 interface Props {
   visible: boolean
@@ -24,31 +24,12 @@ interface Props {
 }
 
 export default function ViewModal(props: Props) {
-  const [screenWidth, setScreenWidth] = React.useState<number>(0)
-
-  const getScreenWidth = () => {
-    const width = Number(Math.round(window.innerWidth).toFixed())
-    setScreenWidth(width)
-  }
-
-  React.useEffect(() => {
-    if (props.visible) {
-      getScreenWidth()
-      window.addEventListener('resize', getScreenWidth)
-    }
-    return () => {
-      window.removeEventListener('resize', getScreenWidth)
-    }
-  }, [props.visible])
 
   return (
     <div>
-      <Dialog
-        open={props.visible}
+      <Modal
+        visible={props.visible}
         onClose={props.onClose}
-        aria-labelledby='Time-interval-modal'
-        aria-describedby='Time-interval-modal'
-        fullWidth={screenWidth <= 500}
       >
         <div className={styles.modal}>
           <div className={styles.closeIcon} onClick={props.onClose}>
@@ -64,7 +45,7 @@ export default function ViewModal(props: Props) {
             />
           </div>
         </div>
-      </Dialog>
+      </Modal>
     </div>
   )
 }

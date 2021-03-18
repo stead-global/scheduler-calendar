@@ -1,0 +1,54 @@
+/**
+ * --------------------------------------------------------------------------
+ * Scheduler-calendar : Modal.module.css
+ * Licensed under MIT (https://github.com/stead-global/scheduler-calendar/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+.container {
+    position: fixed;
+    z-index: 1300;
+    inset: 0px;
+}
+
+.backDrop {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    z-index: -1;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-tap-highlight-color: transparent;
+    opacity: 1;
+    transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.innerContainer {
+    height: 100%;
+    outline: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.innerPaper {
+    max-width: 500px;
+    display: flex;
+    max-height: calc(100% - 64px);
+    flex-direction: column;
+    margin: 32px;
+    position: relative;
+    overflow-y: auto;
+    color: rgba(0, 0, 0, 0.87);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.overFlowHidden {
+    overflow: hidden;
+}
