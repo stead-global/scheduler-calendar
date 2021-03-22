@@ -2,7 +2,7 @@
   "name": "scheduler-calendar",
   "version": "2.2.8",
   "description": "Scheduler Calendar Component for React Js",
-  "author": "stead-global",
+  "author": "stead technologies llp",
   "license": "MIT",
   "repository": "https://github.com/stead-global/scheduler-calendar",
   "main": "dist/index.js",
