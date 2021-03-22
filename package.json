@@ -1,10 +1,13 @@
 {
   "name": "scheduler-calendar",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "Scheduler Calendar Component for React Js",
   "author": "stead technologies llp",
   "license": "MIT",
-  "repository": "https://github.com/stead-global/scheduler-calendar",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stead-global/scheduler-calendar.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
@@ -71,5 +74,11 @@
     "scheduler",
     "TimeandDate",
     "availability"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/stead-global/scheduler-calendar/issues"
+  },
+  "directories": {
+    "example": "example"
+  }
 }
