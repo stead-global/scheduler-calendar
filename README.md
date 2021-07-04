@@ -2,7 +2,8 @@
 
 > Scheduler Calendar Component for React Js
 
-[![NPM](https://img.shields.io/npm/v/scheduler-calendar.svg)](https://www.npmjs.com/package/scheduler-calendar) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/scheduler-calendar.svg)](https://www.npmjs.com/package/scheduler-calendar) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)[![Downloads](https://img.shields.io/npm/dt/scheduler-calendar.svg)](https://www.npmjs.com/package/scheduler-calendar)
+
 
 ## Installation
 
