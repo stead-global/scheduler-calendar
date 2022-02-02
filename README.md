@@ -30,7 +30,8 @@ class Example extends Component {
                     {from: '09:00', to: '10:30'},
                     {from: '11:30', to: '13:00'},
                     {from: '14:30', to: '17:00'},
-                  ]
+                  ],
+                  comment: "Test comment"
                 },
                 {
                   day: "2021-01-26",
@@ -53,7 +54,7 @@ class Example extends Component {
 
 | Prop                           | Type       | Description                                                                           |
 | :----------------------------- | :--------- | :------------------------------------------------------------------------------------ |
-| **`availabilities`**           | `Array`    | List of availabilities. Eg. `[{day: "mon", "slots": [{from: "11:00", to: "13:00"}]}]` |
+| **`availabilities`**           | `Array`    | List of availabilities. Eg. `[{day: "mon", "slots": [{from: "11:00", to: "13:00"}], comment?: "Comment here"}]` |
 | **`duration`**                 | `number`   | Minimum duration of time interval                                                     |
 | **`onIntervalChange`**         | `Function` | Callback when a interval is updated and it's contains the array of updated values     |
 | **`availabilityType`**         | `string`   | values must be `one of rolling (for number of days) or range or infinity`             |
@@ -74,6 +75,8 @@ class Example extends Component {
 | **`intervalStyles`** | `Object`  | Optional. To style each intervals inside a cell                            |
 | **`customHeaderComponent`**           | `Function`    | Function to return custom header |
 | **`inputRef`**           | `any`    | Ref object |
+| **`isCommentEnabled`**           | `boolean`    | Optional. default `false`. to enable or disable comment sections for a day |
+| **`isEditEnabled`**           | `boolean`    | Optional. default `true`. to enable or disable edit availabilities |
 
 ## Screenshots
 

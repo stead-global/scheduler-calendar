@@ -8,6 +8,7 @@
 export interface Availabilities {
   day: string
   slots: AvailabilityIntervals[]
+  comment?: string
 }
 
 export interface ServiceType {
@@ -35,26 +36,28 @@ export interface AvailibilityRangeData {
 }
 
 export interface CalendarProps {
-  availabilityType: string;
-  availabilityEndDate?: string;
-  availabilityStartDate?: string;
-  availabilityRolling?: number;
-  duration: number;
-  availabilities: Availabilities[];
-  onIntervalChange: (value: Availabilities[]) => void;
-  className?: string;
-  initialRenderOfRows?: number;
-  totalNumOfRows?: number;
-  tableContainerStyle?: string;
-  dayTextStyle?: string;
-  dayContainerStyle?: string;
-  intervalsWrapStyle?: string;
-  topHeaderContainerStyle?: string;
-  topHeaderTitleStyle?: string;
-  is24hour: boolean;
-  isBusinessDays: boolean;
-  isDisabledDateLocked: boolean;
-  stylesOfDay?: (day: string, available: boolean, isRolling: boolean) => object;
-  intervalStyles?: object;
-  customHeaderComponent?: (dateRange: string) => void;
+  availabilityType: string
+  availabilityEndDate?: string
+  availabilityStartDate?: string
+  availabilityRolling?: number
+  duration: number
+  availabilities: Availabilities[]
+  onIntervalChange: (value: Availabilities[]) => void
+  className?: string
+  initialRenderOfRows?: number
+  totalNumOfRows?: number
+  tableContainerStyle?: string
+  dayTextStyle?: string
+  dayContainerStyle?: string
+  intervalsWrapStyle?: string
+  topHeaderContainerStyle?: string
+  topHeaderTitleStyle?: string
+  is24hour: boolean
+  isBusinessDays: boolean
+  isDisabledDateLocked: boolean
+  stylesOfDay?: (day: string, available: boolean, isRolling: boolean) => object
+  intervalStyles?: object
+  customHeaderComponent?: (dateRange: string) => void
+  isCommentEnabled?: boolean
+  isEditEnabled?: boolean
 }

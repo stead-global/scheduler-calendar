@@ -5,65 +5,70 @@
  * --------------------------------------------------------------------------
  */
 
-import React from "react";
-import styles from "./Calendar.module.css";
-import TopHeader from "../TopHeader/TopHeader";
-import TableHeader from "../TableHeader/TableHeader";
+import React from 'react'
+import styles from './Calendar.module.css'
+import TopHeader from '../TopHeader/TopHeader'
+import TableHeader from '../TableHeader/TableHeader'
 // eslint-disable-next-line no-unused-vars
-import moment, { Moment } from "moment";
-import TableContent from "../TableContent/TableContent";
-import { getDateRangeTitle } from "../../Utils";
-import ViewModal from "../AvailabilityDialog/AvailabilityDialog";
-import ArrowLeftIcon from "../../assets/Icons/ArrowLeftIcon";
+import moment, { Moment } from 'moment'
+import TableContent from '../TableContent/TableContent'
+import { getDateRangeTitle } from '../../Utils'
+import ViewModal from '../AvailabilityDialog/AvailabilityDialog'
+import ArrowLeftIcon from '../../assets/Icons/ArrowLeftIcon'
 // eslint-disable-next-line no-unused-vars
-import { AvailabilityIntervals, Availabilities, CalendarProps } from "../../Interfaces";
-import clsx from "clsx";
-import OverrideConfirmationDialog from "../OverrideConfirmationDialog/OverrideConfirmationDialog";
-import { PeriodsOfDay } from "../AddIntervalSection/AddIntervalSection";
+import {
+  AvailabilityIntervals,
+  Availabilities,
+  CalendarProps
+} from '../../Interfaces'
+import clsx from 'clsx'
+import OverrideConfirmationDialog from '../OverrideConfirmationDialog/OverrideConfirmationDialog'
+import { PeriodsOfDay } from '../AddIntervalSection/AddIntervalSection'
 
 type OverRideData = {
-  isOverride: boolean;
-  count: number;
-  day: string[];
-  overridedValues: Availabilities[];
-  currentValue: Availabilities[];
-};
+  isOverride: boolean
+  count: number
+  day: string[]
+  overridedValues: Availabilities[]
+  currentValue: Availabilities[]
+}
 
 interface CalendarState {
-  availabilities: Availabilities[];
-  date: Date;
-  isAvailabilityModal: boolean;
-  selectedDay: string;
-  numRowsRender: number;
-  availabilityIntervals: AvailabilityIntervals;
-  isCollapsedView: boolean;
-  isOverrideConfirmation: OverRideData;
-  availabilityStartDate: string;
-  availabilityEndDate: string;
-  availibilityRangeData: any;
-  minScreenWidth: boolean;
+  availabilities: Availabilities[]
+  date: Date
+  isAvailabilityModal: boolean
+  selectedDay: string
+  numRowsRender: number
+  availabilityIntervals: AvailabilityIntervals
+  isCollapsedView: boolean
+  isOverrideConfirmation: OverRideData
+  availabilityStartDate: string
+  availabilityEndDate: string
+  availibilityRangeData: any
+  minScreenWidth: boolean
+  dayComment: string
 }
 
 enum availabilityTypes {
   // eslint-disable-next-line no-unused-vars
-  Rolling = "rolling",
+  Rolling = 'rolling',
   // eslint-disable-next-line no-unused-vars
-  Range = "range",
+  Range = 'range',
   // eslint-disable-next-line no-unused-vars
-  Infinity = "infinity",
+  Infinity = 'infinity'
 }
 
 export default class Calendar extends React.Component<
   CalendarProps,
   CalendarState
 > {
-  private containerRef: React.RefObject<HTMLInputElement>;
+  private containerRef: React.RefObject<HTMLInputElement>
 
   constructor(props: CalendarProps) {
-    super(props);
-    this.containerRef = React.createRef();
+    super(props)
+    this.containerRef = React.createRef()
     this.state = {
-      date: moment().startOf("week").toDate(),
+      date: moment().startOf('week').toDate(),
       isAvailabilityModal: false,
       numRowsRender: props.initialRenderOfRows
         ? props.initialRenderOfRows + 1
@@ -71,171 +76,178 @@ export default class Calendar extends React.Component<
       isCollapsedView: true,
       isOverrideConfirmation: {
         isOverride: false,
-        count: 0,
+        count: 0
       },
       minScreenWidth: true,
-    } as CalendarState;
+      dayComment: ''
+    } as CalendarState
   }
 
   getAvailibilityData = () => {
-    const availabilities = this.props.availabilities;
+    const availabilities = this.props.availabilities
     this.setState({
-      availabilities,
-    });
-  };
+      availabilities
+    })
+  }
 
   getAvailibilityRangeData = () => {
-    let startDate: string;
-    let endDate: string;
+    let startDate: string
+    let endDate: string
 
-    const availabilityType = this.props.availabilityType;
+    const availabilityType = this.props.availabilityType
     if (availabilityType === availabilityTypes.Rolling) {
-      startDate = moment().format("YYYY-MM-DD");
+      startDate = moment().format('YYYY-MM-DD')
       endDate = moment()
-        .add(this.props.availabilityRolling, "days")
-        .format("YYYY-MM-DD");
+        .add(this.props.availabilityRolling, 'days')
+        .format('YYYY-MM-DD')
       // to add weekend days to rooling days
       if (this.props.isBusinessDays) {
         const rolling = this.props.availabilityRolling
           ? this.props.availabilityRolling
-          : 0;
-        const d = moment(startDate, "YYYY-MM-DD").toDate();
-        let count = 0;
+          : 0
+        const d = moment(startDate, 'YYYY-MM-DD').toDate()
+        let count = 0
         while (count <= rolling) {
           if (d.getDay() !== 0 && d.getDay() !== 6) {
-            count = count + 1;
+            count = count + 1
           }
-          d.setDate(d.getDate() + 1);
+          d.setDate(d.getDate() + 1)
         }
-        endDate = moment(d).format("YYYY-MM-DD");
+        endDate = moment(d).format('YYYY-MM-DD')
       }
     } else if (availabilityType === availabilityTypes.Range) {
-      startDate = moment(this.props.availabilityStartDate, "YYYY-MM-DD").format(
-        "YYYY-MM-DD"
-      );
-      endDate = moment(this.props.availabilityEndDate, "YYYY-MM-DD").format(
-        "YYYY-MM-DD"
-      );
+      startDate = moment(this.props.availabilityStartDate, 'YYYY-MM-DD').format(
+        'YYYY-MM-DD'
+      )
+      endDate = moment(this.props.availabilityEndDate, 'YYYY-MM-DD').format(
+        'YYYY-MM-DD'
+      )
     } else {
-      startDate = moment().format("YYYY-MM-DD");
-      endDate = moment().add(100, "years").format("YYYY-MM-DD");
+      startDate = moment().format('YYYY-MM-DD')
+      endDate = moment().add(100, 'years').format('YYYY-MM-DD')
     }
 
     const availibilityRangeData = {
       startDate: startDate,
-      endDate: endDate,
-    };
+      endDate: endDate
+    }
 
     this.setState({
-      availibilityRangeData,
-    });
-  };
+      availibilityRangeData
+    })
+  }
 
   onHandleClickNext = () => {
-    let date: Date;
+    let date: Date
     if (this.state.minScreenWidth) {
       date = moment(this.state.date)
-        .add(this.state.numRowsRender * 7, "days")
-        .toDate();
+        .add(this.state.numRowsRender * 7, 'days')
+        .toDate()
     } else {
-      date = moment(this.state.date).add(7, "days").toDate();
+      date = moment(this.state.date).add(7, 'days').toDate()
     }
     this.setState({
-      date: date,
-    });
-  };
+      date: date
+    })
+  }
 
   onHandleClickPrev = () => {
-    let date: Date;
+    let date: Date
     if (this.state.minScreenWidth) {
       date = moment(this.state.date)
-        .subtract(this.state.numRowsRender * 7, "days")
-        .toDate();
+        .subtract(this.state.numRowsRender * 7, 'days')
+        .toDate()
     } else {
-      date = moment(this.state.date).subtract(7, "days").toDate();
+      date = moment(this.state.date).subtract(7, 'days').toDate()
     }
-    const isBefore = moment().endOf("week").isBefore(moment(this.state.date));
+    const isBefore = moment().endOf('week').isBefore(moment(this.state.date))
     if (isBefore) {
       this.setState({
-        date,
-      });
+        date
+      })
     }
-  };
+  }
 
   getDateRangLabel = () => {
-    const startDate: Moment = moment(this.state.date).startOf("week");
-    let endDate: Moment;
+    const startDate: Moment = moment(this.state.date).startOf('week')
+    let endDate: Moment
     if (this.state.minScreenWidth) {
-      endDate = moment(startDate).add(this.state.numRowsRender * 7 - 1, "days");
+      endDate = moment(startDate).add(this.state.numRowsRender * 7 - 1, 'days')
     } else {
-      endDate = moment(startDate).endOf("week");
+      endDate = moment(startDate).endOf('week')
     }
 
-    return getDateRangeTitle(startDate, endDate);
-  };
+    return getDateRangeTitle(startDate, endDate)
+  }
 
   onDayClick = (day: any) => {
-    const intervals: any = [];
+    const intervals: any = []
     let data = this.state.availabilities.filter(
-      (item: any) => item.day === moment(day).format("YYYY-MM-DD")
-    );
+      (item: any) => item.day === moment(day).format('YYYY-MM-DD')
+    )
     if (data.length === 0) {
       data = this.state.availabilities.filter(
-        (item: any) => item.day === moment(day).format("ddd").toLowerCase()
-      );
+        (item: any) => item.day === moment(day).format('ddd').toLowerCase()
+      )
     }
 
     if (data.length !== 0) {
+      this.setState({
+        dayComment: `${data[0].comment}`
+      })
       data[0].slots.forEach((item: any) => {
         const interval = {
           from: item.from
             ? this.props.is24hour
               ? item.from
-              : moment(item.from, "HH:mm").format("hh:mm a")
-            : "",
+              : moment(item.from, 'HH:mm').format('hh:mm a')
+            : '',
           to: item.to
             ? this.props.is24hour
               ? item.to
-              : moment(item.to, "HH:mm").format("hh:mm a")
-            : "",
-        };
+              : moment(item.to, 'HH:mm').format('hh:mm a')
+            : ''
+        }
 
-        intervals.push(interval);
-      });
+        intervals.push(interval)
+      })
     } else {
+      this.setState({
+        dayComment: ''
+      })
       const interval = {
-        from: "",
-        to: "",
-      };
+        from: '',
+        to: ''
+      }
 
-      intervals.push(interval);
+      intervals.push(interval)
     }
     this.setState({
       selectedDay: day,
       isAvailabilityModal: true,
-      availabilityIntervals: intervals,
-    });
-  };
+      availabilityIntervals: intervals
+    })
+  }
 
   onModalClose = () => {
     this.state.isAvailabilityModal &&
       this.setState({
-        isAvailabilityModal: false,
-      });
-  };
+        isAvailabilityModal: false
+      })
+  }
 
   onShowMore = () => {
     this.setState({
       numRowsRender: this.props.totalNumOfRows ? this.props.totalNumOfRows : 5,
-      isCollapsedView: false,
-    });
-  };
+      isCollapsedView: false
+    })
+  }
 
   onTodayClick = () => {
     this.setState({
-      date: moment().startOf("week").toDate(),
-    });
-  };
+      date: moment().startOf('week').toDate()
+    })
+  }
 
   onIntervalChange = (
     value: Availabilities[],
@@ -243,57 +255,57 @@ export default class Calendar extends React.Component<
   ) => {
     const slots = availability.filter(
       (time: Availabilities) => time.day === value[0].day
-    );
+    )
     if (
       slots !== [] ||
       JSON.stringify(slots[0].slots) !== JSON.stringify(value[0].slots)
     ) {
-      let availabilites: Availabilities[] = availability;
+      let availabilites: Availabilities[] = availability
       value.forEach((slot: Availabilities) => {
         availabilites = availabilites.filter(
           (item: Availabilities) => item.day !== slot.day
-        );
-      });
-      const data = [...value, ...availabilites];
-      this.props.onIntervalChange(data);
+        )
+      })
+      const data = [...value, ...availabilites]
+      this.props.onIntervalChange(data)
     }
-  };
+  }
 
   getOverridingData = (value: Availabilities[]) => {
-    const availabilites: Availabilities[] = this.state.availabilities;
-    const day: string[] = [];
-    let isOverrided: boolean = false;
-    const overridedValues: Availabilities[] = [];
-    let count: number = 0;
+    const availabilites: Availabilities[] = this.state.availabilities
+    const day: string[] = []
+    let isOverrided: boolean = false
+    const overridedValues: Availabilities[] = []
+    let count: number = 0
     value.forEach((eachValue: Availabilities) => {
-      day.push(moment(eachValue.day, "ddd").format("dddd"));
+      day.push(moment(eachValue.day, 'ddd').format('dddd'))
       availabilites.forEach((item: Availabilities) => {
         const isOverride =
-          moment(item.day, "YYYY-MM-DD").format("ddd").toLowerCase() ===
+          moment(item.day, 'YYYY-MM-DD').format('ddd').toLowerCase() ===
             eachValue.day &&
-          moment(item.day, "YYYY-MM-DD").isSameOrAfter(moment(), "day");
+          moment(item.day, 'YYYY-MM-DD').isSameOrAfter(moment(), 'day')
         if (isOverride) {
-          isOverrided = true;
-          count = count + 1;
-          overridedValues.push(item);
+          isOverrided = true
+          count = count + 1
+          overridedValues.push(item)
         }
-      });
-    });
+      })
+    })
     if (
       isOverrided &&
       count === 1 &&
-      moment(this.state.selectedDay).format("YYYY-MM-DD") ===
+      moment(this.state.selectedDay).format('YYYY-MM-DD') ===
         overridedValues[0].day
     ) {
       const availabilities = this.state.availabilities.filter(
         (item: Availabilities) => item.day !== overridedValues[0].day
-      );
-      this.onIntervalChange(value, availabilities);
+      )
+      this.onIntervalChange(value, availabilities)
     } else if (
       isOverrided &&
       !(
         count === 1 &&
-        moment(this.state.selectedDay).format("YYYY-MM-DD") ===
+        moment(this.state.selectedDay).format('YYYY-MM-DD') ===
           overridedValues[0].day
       )
     ) {
@@ -303,65 +315,65 @@ export default class Calendar extends React.Component<
           count,
           day: day,
           overridedValues,
-          currentValue: value,
-        },
-      });
+          currentValue: value
+        }
+      })
     } else {
-      this.onIntervalChange(value, this.state.availabilities);
+      this.onIntervalChange(value, this.state.availabilities)
     }
-  };
+  }
 
   onFormSubmit = (value: Availabilities[], period: PeriodsOfDay) => {
-    const intervals = value;
+    const intervals = value
     if (!this.props.is24hour) {
       intervals[0].slots.forEach((time: AvailabilityIntervals) => {
-        time.from = moment(time.from, "hh:mm a").format("HH:mm");
-        time.to = moment(time.to, "hh:mm a").format("HH:mm");
-      });
+        time.from = moment(time.from, 'hh:mm a').format('HH:mm')
+        time.to = moment(time.to, 'hh:mm a').format('HH:mm')
+      })
     }
     if (period === PeriodsOfDay.ALL) {
-      this.getOverridingData(value);
+      this.getOverridingData(intervals)
     } else {
-      this.onIntervalChange(value, this.state.availabilities);
+      this.onIntervalChange(intervals, this.state.availabilities)
     }
     this.setState({
-      isAvailabilityModal: false,
-    });
-  };
+      isAvailabilityModal: false
+    })
+  }
 
   onOverrideSubmit = (value: boolean) => {
     if (!value) {
       this.onIntervalChange(
         this.state.isOverrideConfirmation.currentValue,
         this.state.availabilities
-      );
+      )
     } else {
-      let availabilites: Availabilities[] = this.state.availabilities;
+      let availabilites: Availabilities[] = this.state.availabilities
 
       this.state.isOverrideConfirmation.currentValue.forEach(
         (eachItem: Availabilities) => {
           availabilites = availabilites.filter(
             (item: Availabilities) => item.day !== eachItem.day
-          );
+          )
         }
-      );
+      )
 
       this.state.isOverrideConfirmation.overridedValues.forEach(
         (item: Availabilities) => {
-          const data: Availabilities[] = [];
+          const data: Availabilities[] = []
           availabilites.forEach((availability: Availabilities) => {
             if (item.day !== availability.day) {
-              data.push(availability);
+              data.push(availability)
             }
-          });
-          availabilites = data;
+          })
+          availabilites = data
         }
-      );
+      )
       const data = [
         ...availabilites,
-        ...this.state.isOverrideConfirmation.currentValue,
-      ];
-      this.props.onIntervalChange(data);
+        ...this.state.isOverrideConfirmation.currentValue
+      ]
+      this.props.onIntervalChange(data)
     }
     this.setState({
       isOverrideConfirmation: {
@@ -369,37 +381,37 @@ export default class Calendar extends React.Component<
         count: 0,
         day: [],
         overridedValues: [],
-        currentValue: [],
-      },
-    });
-  };
+        currentValue: []
+      }
+    })
+  }
 
   getScreenWidth = () => {
-    const refWidth = this.containerRef.current?.clientWidth;
+    const refWidth = this.containerRef.current?.clientWidth
     if (refWidth) {
-      const width = Number(Math.round(refWidth).toFixed());
+      const width = Number(Math.round(refWidth).toFixed())
       this.setState({
-        minScreenWidth: width > 950,
-      });
+        minScreenWidth: width > 950
+      })
     }
-  };
+  }
 
   componentDidMount() {
-    this.getAvailibilityRangeData();
-    this.getAvailibilityData();
-    this.getScreenWidth();
-    window.addEventListener("resize", this.getScreenWidth);
+    this.getAvailibilityRangeData()
+    this.getAvailibilityData()
+    this.getScreenWidth()
+    window.addEventListener('resize', this.getScreenWidth)
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.getScreenWidth);
+    window.removeEventListener('resize', this.getScreenWidth)
   }
 
   componentDidUpdate(prevProps: CalendarProps) {
-    const current = JSON.stringify(this.props.availabilities);
-    const prev = JSON.stringify(prevProps.availabilities);
+    const current = JSON.stringify(this.props.availabilities)
+    const prev = JSON.stringify(prevProps.availabilities)
     if (current !== prev) {
-      this.getAvailibilityData();
+      this.getAvailibilityData()
     }
 
     const propChanges =
@@ -407,9 +419,9 @@ export default class Calendar extends React.Component<
       this.props.availabilityStartDate !== prevProps.availabilityStartDate ||
       this.props.availabilityEndDate !== prevProps.availabilityEndDate ||
       this.props.availabilityRolling !== prevProps.availabilityRolling ||
-      this.props.isBusinessDays !== prevProps.isBusinessDays;
+      this.props.isBusinessDays !== prevProps.isBusinessDays
     if (propChanges) {
-      this.getAvailibilityRangeData();
+      this.getAvailibilityRangeData()
     }
   }
 
@@ -420,8 +432,8 @@ export default class Calendar extends React.Component<
       numRowsRender,
       date,
       availibilityRangeData,
-      minScreenWidth,
-    } = this.state;
+      minScreenWidth
+    } = this.state
     const {
       initialRenderOfRows,
       className,
@@ -435,18 +447,18 @@ export default class Calendar extends React.Component<
       isBusinessDays,
       isDisabledDateLocked,
       stylesOfDay,
-      intervalStyles,
-    } = this.props;
+      intervalStyles
+    } = this.props
     const initialRendersOfRow: number = initialRenderOfRows
       ? initialRenderOfRows + 1
-      : 4;
+      : 4
     const intervalDetails = {
       day: selectedDay,
-      duration: this.props.duration,
-    };
+      duration: this.props.duration
+    }
     const isToday =
-      moment(date).format("DD-MM-YYYY") !==
-      moment().startOf("week").format("DD-MM-YYYY");
+      moment(date).format('DD-MM-YYYY') !==
+      moment().startOf('week').format('DD-MM-YYYY')
     const customHeader = this.props.customHeaderComponent ? (
       this.props.customHeaderComponent(this.getDateRangLabel())
     ) : (
@@ -456,39 +468,39 @@ export default class Calendar extends React.Component<
         onPrev={this.onHandleClickPrev}
         onTodayClick={this.onTodayClick}
         isToday={isToday}
-        isBefore={moment().endOf("week").isBefore(moment(this.state.date))}
+        isBefore={moment().endOf('week').isBefore(moment(this.state.date))}
         topHeaderContainerStyle={topHeaderContainerStyle}
         topHeaderTitleStyle={topHeaderTitleStyle}
       />
-    );
+    )
     return (
       <div className={clsx(className, styles.container)}>
         {customHeader}
         <div
-          style={{ position: "relative" }}
+          style={{ position: 'relative' }}
           className={tableContainerStyle}
           ref={this.containerRef}
         >
           <table className={styles.table}>
             <tbody>
-              {minScreenWidth ? <TableHeader /> : ""}
-                <TableContent
-                  date={this.state.date}
-                  onDayClick={this.onDayClick}
-                  numRowsRender={numRowsRender}
-                  availibilityRangeData={availibilityRangeData}
-                  availabilityData={this.state.availabilities}
-                  isCollapsed={this.state.isCollapsedView}
-                  dayContainerStyle={dayContainerStyle}
-                  dayTextStyle={dayTextStyle}
-                  intervalsWrapStyle={intervalsWrapStyle}
-                  is24hour={is24hour}
-                  isBusinessDays={isBusinessDays}
-                  isDisabledDateLocked={isDisabledDateLocked}
-                  stylesOfDay={stylesOfDay}
-                  intervalStyles={intervalStyles}
-                  minScreenWidth={minScreenWidth}
-                />
+              {minScreenWidth ? <TableHeader /> : ''}
+              <TableContent
+                date={this.state.date}
+                onDayClick={this.onDayClick}
+                numRowsRender={numRowsRender}
+                availibilityRangeData={availibilityRangeData}
+                availabilityData={this.state.availabilities}
+                isCollapsed={this.state.isCollapsedView}
+                dayContainerStyle={dayContainerStyle}
+                dayTextStyle={dayTextStyle}
+                intervalsWrapStyle={intervalsWrapStyle}
+                is24hour={is24hour}
+                isBusinessDays={isBusinessDays}
+                isDisabledDateLocked={isDisabledDateLocked}
+                stylesOfDay={stylesOfDay}
+                intervalStyles={intervalStyles}
+                minScreenWidth={minScreenWidth}
+              />
             </tbody>
           </table>
           {numRowsRender === initialRendersOfRow && minScreenWidth ? (
@@ -509,6 +521,9 @@ export default class Calendar extends React.Component<
           formValues={this.state.availabilityIntervals}
           onFormSubmit={this.onFormSubmit}
           is24hour={is24hour}
+          isCommentEnabled={this.props.isCommentEnabled}
+          comment={this.state.dayComment}
+          isEditEnabled={this.props.isEditEnabled}
         />
         <OverrideConfirmationDialog
           visible={this.state.isOverrideConfirmation.isOverride}
@@ -517,6 +532,6 @@ export default class Calendar extends React.Component<
           day={this.state.isOverrideConfirmation.day}
         />
       </div>
-    );
+    )
   }
 }
