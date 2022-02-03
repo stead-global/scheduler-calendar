@@ -21,16 +21,15 @@ interface Props {
   intervalDetails: any
   formValues: any
   is24hour: boolean
+  comment?: string
+  isCommentEnabled?: boolean
+  isEditEnabled?: boolean
 }
 
 export default function ViewModal(props: Props) {
-
   return (
     <div>
-      <Modal
-        visible={props.visible}
-        onClose={props.onClose}
-      >
+      <Modal visible={props.visible} onClose={props.onClose}>
         <div className={styles.modal}>
           <div className={styles.closeIcon} onClick={props.onClose}>
             <CloseSvg />
@@ -42,6 +41,9 @@ export default function ViewModal(props: Props) {
               formValues={props.formValues}
               onFormSubmit={props.onFormSubmit}
               is24hour={props.is24hour}
+              isCommentEnabled={props.isCommentEnabled}
+              comment={props.comment}
+              isEditEnabled={props.isEditEnabled}
             />
           </div>
         </div>

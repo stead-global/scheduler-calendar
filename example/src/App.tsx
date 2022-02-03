@@ -1,5 +1,3 @@
-import React from 'react'
-
 import SchedulerCalendar from 'scheduler-calendar'
 import 'scheduler-calendar/dist/index.css'
 import Styles from './App.css.js'
@@ -25,7 +23,8 @@ const App = () => {
             { from: '09:00', to: '10:30' },
             { from: '11:30', to: '13:00' },
             { from: '14:30', to: '17:00' }
-          ]
+          ],
+          comment: 'Test comment'
         },
         {
           day: '2021-01-26',
@@ -40,6 +39,7 @@ const App = () => {
       onIntervalChange={() => {}}
       stylesOfDay={stylesOfDay}
       intervalStyles={Styles.intervals}
+      isCommentEnabled={true}
     />
   )
 }
